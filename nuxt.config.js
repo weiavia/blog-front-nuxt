@@ -30,7 +30,6 @@ module.exports = {
   */
   css: [
     'element-ui/lib/theme-chalk/index.css',
-    '@/static/style/skin-var.scss',
     '@/static/style/normalize.css',
     '@/static/style/common.scss'
   ],
@@ -50,7 +49,12 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    '@nuxtjs/style-resources'
   ],
+
+  styleResources: {
+    scss: './static/style/skin-var.scss'
+  },
   /*
   ** Axios module configuration
   */
@@ -68,10 +72,11 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-    },
-
-    styleResources: {
-      scss: './static/style/skin-var.scss'
     }
+  },
+  
+  server: {
+    port: 3002,
+    host: '0.0.0.0'
   }
 }

@@ -11,7 +11,7 @@ config.dev = !(app.env === 'production')
 async function start() {
   // Instantiate nuxt.js
   const nuxt = new Nuxt(config)
-  console.log(process.env.PORT)
+  
   const {
     host = process.env.HOST || '127.0.0.1',
     port = process.env.PORT || 3002
@@ -32,6 +32,7 @@ async function start() {
     nuxt.render(ctx.req, ctx.res)
   })
 
+  console.log(port)
   app.listen(port, host)
   consola.ready({
     message: `Server listening on http://${host}:${port}`,
