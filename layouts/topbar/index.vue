@@ -17,6 +17,10 @@
   .right_wrpper {
     display: flex;
     align-items: center;
+    height: 100%;
+  }
+  .placeholder {
+    visibility: hidden;
   }
 }
 </style>
@@ -30,6 +34,7 @@
       <i class="iconfont icon-xiazai44  pointer" @click="home" v-show="!inIndex"/>
       <i class="iconfont icon-gangbi pointer" @click="write" v-show="penShow"/>
       <el-switch
+        class='switch'
         v-model="onOff"
         active-color="#13ce66"
         inactive-color="#ff4949">

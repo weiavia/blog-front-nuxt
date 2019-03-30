@@ -15,7 +15,7 @@ export default (param) => {
         error.response = res
         throw error
       }
-      resolve(res.data)
+      resolve(res.data.data)
     }).catch((error) => {
       if(error.response) {
         window.vm.$message({

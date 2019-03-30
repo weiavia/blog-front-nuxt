@@ -4,5 +4,9 @@ import locale from 'element-ui/lib/locale/lang/en'
 
 export default () => {
   Vue.use(Element, { locale })
+
+  if(!process.server) {
+    window.bus = new Vue()
+  }
 }
  
