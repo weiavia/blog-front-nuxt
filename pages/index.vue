@@ -25,6 +25,9 @@ export default {
   // beforeDestroy() {
   //   this.setInIndex(false)
   // },
+  activated() {
+    this.$refs.list.waterFall()
+  },
   deactivated() {
     this.setInIndex(false)
   },

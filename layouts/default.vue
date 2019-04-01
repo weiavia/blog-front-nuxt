@@ -48,7 +48,7 @@
 <script>
 import Sidebar from '@/layouts/sidebar/index'
 import Topbar from '@/layouts/topbar/index'
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 export default {
   data() {
     return {
@@ -58,8 +58,11 @@ export default {
   mounted() {
     window.vm = this
   },
+  methods: {
+    ...mapMutations(['setSidebarShow'])
+  },
   computed:  {
-    ...mapGetters(['sidebarShow'])
+    ...mapGetters(['sidebarShow']),
   },
   components: {
     Sidebar,

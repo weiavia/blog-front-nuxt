@@ -106,7 +106,7 @@ export default {
       this.$refs.reply.show(COMMENT_TYPE.REPLY)
     },
     onComment() {
-      this.$refs.reply.show(COMMENT_TYPE.ARTICLE)
+      this.$refs.reply.show(COMMENT_TYPE.ARTICLE, this.article.id)
     }
   },
   components: {

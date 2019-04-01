@@ -5,5 +5,9 @@ export default {
   
   inIndex (state) {
     return state.inIndex
+  },
+
+  comments () {
+    return state.comments
   }
 }

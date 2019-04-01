@@ -1,10 +1,17 @@
-<style lang='sass' scoped>
-  .container
-    & /deep/ .el-textarea__inner
-      min-height: 200px !important
-    .input
-      width: 300px
-      display: block
+<style lang='scss' scoped>
+  .container {
+    & /deep/ .el-textarea__inner {
+      min-height: 200px !important;
+    }
+
+    .baseinfo {
+      display: flex;
+      justify-content: space-between;
+      .input {
+        width: 48%;
+      }
+    }
+  }
 </style>
 
 <template>
@@ -17,14 +24,16 @@
       :center="true"
       :before-close="handleClose">
       <el-form ref="form" :model="form" labelPosition="top" label-width="80px">
-        <el-input v-model="form.concat" placeholder="留下你的联系方式 QQ / EMAIL 都行" class="input mb10"></el-input>
+        <div class="baseinfo">
+          <el-input v-model="form.name" placeholder="你的名字，2 < name.length < 6" class="input mb10"></el-input>
+          <el-input v-model="form.url" placeholder="你的主页" class="input"></el-input>
+        </div>
         <el-form-item>
-          <el-input type="textarea" v-model="form.text" class="mb10" placeholder="内容写在这"/>
-          
+          <el-input type="textarea" v-model="form.content" class="mb10" placeholder="内容写在这"/>
         </el-form-item>
       </el-form>
       <div slot="footer">
-        <el-button type="primary">写完了</el-button>
+        <el-button type="primary" @click="onSave">写完了</el-button>
       </div>
     </el-dialog>
   </div>
@@ -32,28 +41,54 @@
 
 <script>
 import { COMMENT_TYPE } from '@/config/enum.js'
+import { createComment } from '@/api/comment'
+import { deleteNullKey } from '@/helper'
+
 export default {
   data () {
     return {
       dialogVisible: false,
-      text: '',
       form: {
         concat: '',
-        text: ''
+        name: '',
+        url: '',
+        theme_id: 0,
+        quote_id: 0
       },
       title: ''
     };
   },
   methods: {
+    async onSave() {
+      let data = deleteNullKey(this.form)
+      await createComment(data)
+
+      this.form.name = ''
+      this.form.content = ''
+      this.form.url = ''
+
+      this.dialogVisible = false
+      this.$notify({
+        title: '成功',
+        message: '你的评论提交成功，大侠审核后可见！',
+        type: 'success'
+      });
+    },
+
     handleClose() {
       this.dialogVisible = false
     },
-    show(type) {
+    
+    show(type, theme_id, quote_id = '') {
+      this.form.theme_id = theme_id
+      this.form.quote_id = quote_id
+
       if(type === COMMENT_TYPE.ARTICLE) {
         this.title = '自古评论出淫才'
       } else {
         this.title = '回复年少不听张学友的评论'
       }
+      
       this.dialogVisible = true
     }
   }
