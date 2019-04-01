@@ -78,7 +78,7 @@ import { returnStatement } from '@babel/types';
 
 export default {
   async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
-    let article = await findOneById(4)
+    let article = await findOneById(3)
     return { article }
   },
 

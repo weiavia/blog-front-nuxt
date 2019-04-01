@@ -22,9 +22,6 @@ export default {
   asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
     store.dispatch('homeBlockList')
   },
-  // beforeDestroy() {
-  //   this.setInIndex(false)
-  // },
   activated() {
     this.$refs.list.waterFall()
   },

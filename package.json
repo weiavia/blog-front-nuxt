@@ -18,7 +18,7 @@
     "cross-env": "^5.2.0",
     "element-ui": "^2.4.11",
     "koa": "^2.6.2",
-    "mavon-editor-via": "^1.0.1",
+    "mavon-editor-via": "^1.0.2",
     "nuxt": "^2.4.0",
     "perfect-scrollbar": "^1.4.0"
   },
