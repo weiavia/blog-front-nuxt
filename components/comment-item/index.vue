@@ -60,9 +60,9 @@
       <p class="text">{{comment.content}}</p>
       <div class="quote" v-if="comment.quote">
         <div class="info">
-          路过一只大侠 (7楼) :
+          {{comment.quote.name}} (7楼) :
         </div>
-        <p>十三届全国人大二次会议5日开幕，政协会议已在3日开始举行，独具中国政治特色的两会将在这个时间对这个国家的各项大政方针开展集中讨论。</p>
+        <p>{{comment.quote.content}}</p>
       </div>
       <div class="link_num">
         <i class="iconfont icon-xihuan" /> 980
