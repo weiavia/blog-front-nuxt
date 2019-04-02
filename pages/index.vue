@@ -4,7 +4,7 @@
 
 <template>
   <section class="home">
-    <list ref="list"/>
+    <list ref="list" :blocks="blocks" />
   </section>
 </template>
 
@@ -19,8 +19,11 @@ export default {
      
     };
   },
-  asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
-    store.dispatch('homeBlockList')
+  async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
+    await store.dispatch('getBlocks')
+  },
+  mounted() {
+    // console.log(this.blocks)
   },
   activated() {
     this.$refs.list.waterFall()
@@ -29,7 +32,7 @@ export default {
     this.setInIndex(false)
   },
   computed: {
-    ...mapGetters(['sidebarShow'])
+    ...mapGetters(['sidebarShow', 'blocks'])
   },
   methods: {
     ...mapMutations(['setInIndex'])

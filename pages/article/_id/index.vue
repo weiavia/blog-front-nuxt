@@ -63,7 +63,7 @@
       <span class="construction">分享</span>
       <span class="construction">复制文章URL到剪切板</span>
     </div>
-    <comment @reply="onReply" />
+    <comment @reply="onReply" :comments="article.comments"/>
     <reply ref="reply"/>
   </scroll>
 </template>
@@ -74,14 +74,9 @@ import Comment from '@/components/comment/index'
 import Reply from '@/components/reply/reply'
 import { findOneById } from '@/api/block'
 import { COMMENT_TYPE } from '@/config/enum.js'
-import { returnStatement } from '@babel/types';
+import { returnStatement } from '@babel/types'
 
 export default {
-  async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
-    let article = await findOneById(3)
-    return { article }
-  },
-
   data () {
     return {
       article: null,
@@ -91,19 +86,35 @@ export default {
     }
   },
 
+  // 动态参数校验
+  validate({ params }) {
+    let id = params.id
+    if(!id || !parseInt(id)) {
+      return false
+    }
+    return true
+  },
+
+  // 预取数据
+  async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
+    let article = await findOneById(params.id)
+    article.content = article.article.content
+    return { article }
+  },
+
   async mounted() {
     this.$nextTick(() => {
       this.$refs.scroller.refresh()
     })
 
-    bus.$on('reply', () => {
-      this.onReply()
+    bus.$on('reply', (quote_id) => {
+      this.onReply(quote_id)
     })
   },
 
   methods: {
-    onReply() {
-      this.$refs.reply.show(COMMENT_TYPE.REPLY)
+    onReply(quote_id) {
+      this.$refs.reply.show(COMMENT_TYPE.REPLY, this.article.id, quote_id)
     },
     onComment() {
       this.$refs.reply.show(COMMENT_TYPE.ARTICLE, this.article.id)

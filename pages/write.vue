@@ -41,13 +41,10 @@ export default {
   methods: {
     async save(v, r) {
       let data = {
-        content: v,
+        article: v,
         title: this.title,
         subTitle: this.described
       }
-      this.value = v + 1
-      // this.loading = true
-
       await write(data)
       
       this.$notify.success({

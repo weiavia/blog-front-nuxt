@@ -1,15 +1,15 @@
 <style lang="scss" scoped>
-  // @import url('../../static/style/block-common');
+  @import url('../../static/style/block-common.scss');
 </style>
 
 
 <template>
   <div class="tBlock block_item">
     <p class="class">算法&数据结构</p>
-    <h2 class="title">二分查找</h2>
-    <time>2018.06.02</time>
-    <p class="sketch">{{txt}}</p>
-    <div class="readAll" @click="readAll">阅读全文</div>
+    <h2 class="title">{{block.title}}</h2>
+    <time>{{block.creteTime | time}}</time>
+    <p class="sketch">{{block.subTitle}}</p>
+    <div class="readAll" @click="onDetail">阅读全文</div>
     <div class="operate">
       <i class="iconfont icon-xiaoxi"> 2k</i>
       <i class="iconfont icon-chakan"> 2k</i>
@@ -19,16 +19,27 @@
 </template>
 
 <script>
+import { formatTime } from '@/helper'
 
 export default {
-  props: ['txt'],
+  props: ['block'],
   data () {
     return {
     };
   },
+
   methods: {
-    readAll() {
-      this.$router.push('article')
+    onDetail() {
+      this.$router.push({
+        path: `/article/${this.block.id}`
+      })
+    }
+  },
+
+  filters: {
+    time(date) {
+      let time = formatTime(date)
+      return `${time.year}年${time.month}月${time.day}日 ${time.hour}:${time.minute}:${time.second}`
     }
   }
 }

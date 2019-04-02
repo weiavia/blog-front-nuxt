@@ -53,13 +53,12 @@
   <div class="container">
     <img class="face" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553607319425&di=76ad6532269991a6ada54fc56286c171&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01a3865ab91314a8012062e3c38ff6.png%401280w_1l_2o_100sh.png"/>
     <div class="main">
-      
       <div class="info">
-        <span class="name">年少不听张学友</span>
+        <span class="name">{{comment.name}}</span>
         <time class="time"><i class="iconfont icon-shijian" /> 2018.06.02</time>
       </div>
-      <p class="text">《一翦梅》，小梅，“那么娴静那么标致，...</p>
-      <div class="quote">
+      <p class="text">{{comment.content}}</p>
+      <div class="quote" v-if="comment.quote">
         <div class="info">
           路过一只大侠 (7楼) :
         </div>
@@ -75,10 +74,15 @@
 
 <script>
 import Item from '@/components/comment-item/index'
+
 export default {
+  props: ['comment'],
+  created() {
+    console.log(this.comment)
+  },
   methods: {
     reply() {
-      bus.$emit('reply')
+      bus.$emit('reply', this.comment.id)
     }
   },
   components: {

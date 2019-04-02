@@ -46,15 +46,9 @@
     <div class="load_shade" ref="loadShade" />
     <div ref="wrapper" class="container">
       <div class="list" ref="content">
-        <t-block :txt="item"  v-for="(item, index) in data" :key="index" class="item"/>
-        <m-block  class="item"/>
-        <m-block  class="item"/>
-        <m-block  class="item"/>
-        <m-block  class="item"/>
-        <m-block  class="item"/>
-        <m-block  class="item"/>
-        <m-block  class="item"/>
-        <m-block  class="item"/>
+        <template v-for="(item, index) in blocks">
+          <t-block :block="item"  class="item"/>
+        </template>
       </div>
       <div class="bottom_line">我是有底线的</div>
     </div>
@@ -68,7 +62,7 @@ import Scroll from '@/components/scroll/scroll'
 
 export default {
   props: {
-    list: {
+    blocks: {
       type: Array,
       defalut: []
     }
@@ -106,8 +100,6 @@ export default {
   },
   methods: {
     waterFall() {
-      
-
       // 根据容器宽度算出共有几列
       // this.column = Math.max( Math.floor( this.$refs.wrapper.offsetWidth / this.columnWidth ), 1 )
       // // 根据列数

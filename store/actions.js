@@ -1,12 +1,10 @@
-import '@/api/comment'
+import { findAll } from '@/api/block'
 
 export default {
-  // 首页列表数据
-  homeBlockList(ctx) {
-    
-  },
-
-  async commentList(ctx, page = 0) {
-    
+  // 主题列表数据
+  async getBlocks({commit}) {
+    let blocks = await findAll()
+    // console.log(blocks)
+    commit('setBlocks', blocks)
   }
 }

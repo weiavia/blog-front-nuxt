@@ -6,3 +6,61 @@ export function deleteNullKey(obj) {
   }
   return obj
 }
+
+
+export function formatTime (date, hasYear) {
+  date = new Date(date)
+  
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+
+  return {
+    year,
+    month,
+    day,
+    hour,
+    minute: formatNumber(minute),
+    second: formatNumber(second)
+  }
+}
+
+const formatNumber = (n, isMilli) => {
+  n = n.toString()
+  let v = n
+  if (isMilli) {
+    if(n.length == 1) {
+      v = '00' + n
+    } else if(n.length == 2) {
+      v = '0' + n
+    }
+    return v
+  } else {
+    return n[1] ? n : '0' + n
+  } 
+}
+
+const formatCountDown = (time) => {
+  var date = new Date(time)
+  return {
+    day: parseInt(time / 1000 / 60 / 60 / 24) ,
+    hour: formatNumber(parseInt(time / 1000 / 60 / 60 % 24)),
+    minute: formatNumber(date.getMinutes()),
+    second: formatNumber(date.getSeconds()),
+    milli: formatNumber(date.getMilliseconds(), true)
+  }
+}
+
+const getQueryString = (name) => {
+  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");  
+  var r = window.location.search.substr(1).match(reg);  //获取url中"?"符后的字符串并正则匹配
+  var context = "";  
+  if (r != null)  
+    context = r[2];  
+  reg = null;  
+  r = null;  
+  return context == null || context == "" || context == "undefined" ? null : context;  
+}

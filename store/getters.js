@@ -1,13 +1,17 @@
 export default {
-  sidebarShow (state) {
+  sidebarShow(state) {
     return state.sidebarShow
   },
   
-  inIndex (state) {
+  inIndex(state) {
     return state.inIndex
   },
 
-  comments () {
+  comments(state) {
     return state.comments
+  },
+
+  blocks(state) {
+    return state.blocks
   }
 }

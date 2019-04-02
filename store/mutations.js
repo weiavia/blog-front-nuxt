@@ -6,6 +6,12 @@ export default {
     state.inIndex = boolean
   },
 
+  // 主题列表
+  setBlocks(state, blocks) {
+    state.blocks = blocks
+  },
+
+   // 评论列表
   setComments(state, comment) {
     let comments = this.state.comments.concat([])
     comments.push(comment)

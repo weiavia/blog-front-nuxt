@@ -4,7 +4,7 @@ import { BLOCK_TYPE } from '../config/enum'
 
 
 export function write(param) {
-  let url = apiBaseUrl + '/block'
+  let url = apiBaseUrl + '/blocks'
 
   return request({
     url,
@@ -14,6 +14,11 @@ export function write(param) {
 }
 
 export function findOneById(id) {
-  let url = apiBaseUrl + `/block?id=${id}`
+  let url = apiBaseUrl + `/blocks/${id}`
+  return request({ url })
+}
+
+export function findAll() {
+  let url = apiBaseUrl + `/blocks`
   return request({ url })
 }
