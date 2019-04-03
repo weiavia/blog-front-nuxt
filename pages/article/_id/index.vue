@@ -63,7 +63,7 @@
       <span class="construction">分享</span>
       <span class="construction">复制文章URL到剪切板</span>
     </div>
-    <comment @reply="onReply" :comments="article.comments"/>
+    <comment @reply="onReply" :article="article"/>
     <reply ref="reply"/>
   </scroll>
 </template>
@@ -75,6 +75,7 @@ import Reply from '@/components/reply/reply'
 import { findOneById } from '@/api/block'
 import { COMMENT_TYPE } from '@/config/enum.js'
 import { returnStatement } from '@babel/types'
+
 
 export default {
   data () {

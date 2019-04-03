@@ -58,11 +58,11 @@
         <time class="time"><i class="iconfont icon-shijian" /> 2018.06.02</time>
       </div>
       <p class="text">{{comment.content}}</p>
-      <div class="quote" v-if="comment.quote">
+      <div class="quote" v-if="comment.quote_id">
         <div class="info">
-          {{comment.quote.name}} (7楼) :
+          {{comment.quote_id.name}} (7楼) :
         </div>
-        <p>{{comment.quote.content}}</p>
+        <p>{{comment.quote_id.content}}</p>
       </div>
       <div class="link_num">
         <i class="iconfont icon-xihuan" /> 980
@@ -78,7 +78,7 @@ import Item from '@/components/comment-item/index'
 export default {
   props: ['comment'],
   created() {
-    console.log(this.comment)
+    // console.log(this.comment)
   },
   methods: {
     reply() {

@@ -52,7 +52,7 @@ export default {
         concat: '',
         name: '',
         url: '',
-        theme_id: 0,
+        block_id: 0,
         quote_id: 0
       },
       title: ''
@@ -79,8 +79,8 @@ export default {
       this.dialogVisible = false
     },
     
-    show(type, theme_id, quote_id = '') {
-      this.form.theme_id = theme_id
+    show(type, block_id, quote_id = '') {
+      this.form.block_id = block_id
       this.form.quote_id = quote_id
 
       if(type === COMMENT_TYPE.ARTICLE) {

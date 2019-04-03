@@ -18,13 +18,17 @@ export default (param) => {
       resolve(res.data.data)
     }).catch((error) => {
       if(error.response) {
+        let message = error.response.data.message
+        if( message instanceof Array ) {
+          message = message.split(';')[0]
+        }
+        
         window.vm.$message({
           showClose: true,
-          message: `API: error: ${error.response.data.errno}`,
+          message: `API: ${message}, `,
           type: 'warning'
         });
       }
-      
     })
   })
 }

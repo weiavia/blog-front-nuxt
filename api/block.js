@@ -2,7 +2,6 @@ import request from './request'
 import { apiBaseUrl } from '@/config'
 import { BLOCK_TYPE } from '../config/enum'
 
-
 export function write(param) {
   let url = apiBaseUrl + '/blocks'
 

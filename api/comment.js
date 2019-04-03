@@ -1,8 +1,9 @@
 import request from './request'
 import { apiBaseUrl } from '@/config'
+import { COMMENT_PAGE_TAKE } from '@/config/enum'
 
 export function createComment(param) {
-  let url = apiBaseUrl + '/comment'
+  let url = apiBaseUrl + '/comments'
 
   return request({
     url,
@@ -11,7 +12,7 @@ export function createComment(param) {
   })
 }
 
-export function getCommentsByThemeId(theme_id) {
-  let url = apiBaseUrl + `/comment?theme_id=${theme_id}`
+export function getCommentsByThemeId(block_id, page_skip = 0, page_take = COMMENT_PAGE_TAKE) {
+  let url = apiBaseUrl + `/comments?block_id=${block_id}&page_skip=${page_skip}&page_take=${page_take}`
   return request({ url })
 }
