@@ -8,19 +8,32 @@
       text-align: center; 
       color: $color_level_2;
     }
+    .more.noMore {
+      cursor: default;
+      text-decoration: none;
+    }
+    .emtpy {
+      font-size: 30px;
+      text-align: center;
+      padding: 60px 0;
+      color: $color_level_2;
+    }
   }
 </style>
 
 <template>
   <div class="container">
     <item v-for="comment, index in comments" :comment="comment" :key="index" />
-    <div class="more pointer" @click="onMore">{{moreState}}</div>
+    <div class="more pointer" :class="{noMore: moreState=='没有更多了'}" @click="onMore" v-if="this.comments.length">{{moreState}}</div>
+    <div class="emtpy" v-else>评论区什么都没有</div>
   </div>
 </template>
 
 <script>
 import Item from '@/components/comment-item/index'
 import { getCommentsByThemeId } from '@/api/comment'
+import { setLike, likeIn } from '@/helper'
+import { returnStatement } from '@babel/types';
 
 export default {
   props: ['article'],
@@ -35,7 +48,17 @@ export default {
     this.count = this.article.comment.count
     this.comments = this.article.comment.comments
 
-    // console.log(this.comments)
+    // 设置初始值
+    this.comments.map((comment) => {
+      comment.isLike = false
+    })
+
+    if(this.count <= this.comments.length) {
+      this.moreState = '没有更多了'
+    }
+  },
+  mounted() {
+    this.addLikeFlag()
   },
   methods: {
     async onMore() {
@@ -44,13 +67,19 @@ export default {
         this.skip ++
         let comment = await getCommentsByThemeId(this.article.id, this.skip)
         this.comments = this.comments.concat(comment.comments)
-
+        this.addLikeFlag()
         if(comment.count <= this.comments.length) {
           this.moreState = '没有更多了'
         } else {
           this.moreState = '查看更多'
         }
       } 
+    },
+    // 服务端没有localstorge所在要在mounted后计算 isLike
+    addLikeFlag() {
+      this.comments.map((comment) => {
+        comment.isLike = likeIn('comment', comment.id)
+      })
     }
   },
   components: {

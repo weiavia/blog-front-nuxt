@@ -2,7 +2,6 @@
   @import url('../../static/style/block-common.scss');
 </style>
 
-
 <template>
   <div class="tBlock block_item">
     <p class="class">算法&数据结构</p>
@@ -13,7 +12,7 @@
     <div class="operate">
       <i class="iconfont icon-xiaoxi"> 2k</i>
       <i class="iconfont icon-chakan"> 2k</i>
-      <i class="iconfont icon-xihuan"> 2k</i>
+      <i class="iconfont icon-xihuan"> {{block.praise_number}}</i>
     </div>
   </div>
 </template>

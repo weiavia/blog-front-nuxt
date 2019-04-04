@@ -36,7 +36,6 @@
     position: absolute;
     bottom: 5px;
     left: 0;
-
   }
 }
 </style>

@@ -9,10 +9,17 @@ export const COMMENT_TYPE = {
   REPLY: 2
 }
 
+
 export const CLASS_TYPE = {
   HOME: 1,
   FRONT: 2,
   MATH: 3
+}
+
+// 点赞类型
+export const PRAISE_TYPE = {
+  BLOCk: 1,
+  COMMENT: 2
 }
 
 export const HAS_ERROR = 1000

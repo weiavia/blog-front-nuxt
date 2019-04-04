@@ -14,19 +14,26 @@
       flex-grow: 1
       .info
         margin-bottom: 10px
+        height: 20px
+        line-height: 20px
       .name
         font-size: 15px
         padding-right: 10px
         display: inline-block
+      .floor
+        font-size: 12px
       .time, .icon-shijian
         font-size: 12px
       .text
         font-size: 14px
         line-height: 1.5
         color: #666
-      .link_num
+        margin-bottom: 15px
+      .like_wrpper
         text-align: right
         cursor: pointer
+        .like
+          color: red
       .iconfont
         font-size: 14px
       .reply_btn
@@ -36,16 +43,19 @@
     .quote
       width: 100%
       border-radius: 6px
-      background: rgba(0,0,0, 0.3)
-      margin: 10px 0
-      color: #fff
+      // background: rgba(255,255,255, 0.6)
+      border: 1px dotted $color_level_2
+      margin: 10px 0 20px 0
+      color: red
       padding: 10px
       box-sizing: border-box
       font-size: 12px
       .info
+        color: $color_level_2
         margin-bottom: 10px
+        // text-decoration: underline
       p
-        color: #eee
+        color: $color_level_2
         line-height: 1.5
 </style>
 
@@ -56,16 +66,19 @@
       <div class="info">
         <span class="name">{{comment.name}}</span>
         <time class="time"><i class="iconfont icon-shijian" /> 2018.06.02</time>
+        <span class="fr floor">{{comment.floor}}楼</span>
       </div>
       <p class="text">{{comment.content}}</p>
       <div class="quote" v-if="comment.quote_id">
         <div class="info">
-          {{comment.quote_id.name}} (7楼) :
+          {{comment.quote_id.name}} - {{comment.quote_id.floor}}楼 :
         </div>
         <p>{{comment.quote_id.content}}</p>
       </div>
-      <div class="link_num">
-        <i class="iconfont icon-xihuan" /> 980
+      <div class="like_wrpper">
+        <span :class="{'like': comment.isLike}" @click="onLike(comment)">
+          <i class="iconfont icon-xihuan" /> {{comment.praise_number}}
+        </span>
         <span class="reply_btn" @click='reply'>回复</span>
       </div>
     </div>
@@ -74,13 +87,26 @@
 
 <script>
 import Item from '@/components/comment-item/index'
+import { setLike, linkIn } from '@/helper'
+import { praise } from '@/api/common'
+import { PRAISE_TYPE } from '@/config/enum'
 
 export default {
   props: ['comment'],
-  created() {
-    // console.log(this.comment)
+  data() {
+    return {
+      
+    }
   },
   methods: {
+    onLike(comment) {
+      if(!this.comment.isLike) {
+        praise({type: PRAISE_TYPE.COMMENT, id: this.comment.id })
+        this.comment.praise_number ++
+        this.comment.isLike = true
+        setLike('comment', comment.id)
+      }
+    },
     reply() {
       bus.$emit('reply', this.comment.id)
     }

@@ -64,3 +64,23 @@ const getQueryString = (name) => {
   r = null;  
   return context == null || context == "" || context == "undefined" ? null : context;  
 }
+
+
+// localstoreg 存储点赞记录
+export function setLike(prefix, value) {
+  let likes = localStorage.getItem(`${prefix}_like`) || ''
+  likes = likes.split(',')
+  likes.push(value)
+  localStorage.setItem(`${prefix}_like`, likes)
+}
+
+// 获取点赞记录
+export function likeIn(prefix, value) {
+  let likes = localStorage.getItem(`${prefix}_like`) || ''
+  likes = likes.split(',')
+  let id = likes.find((n) => n == value)
+  if(id) {
+    return true
+  }
+  return false
+}
