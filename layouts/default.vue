@@ -38,7 +38,7 @@
     <div class="container">
       <div class="main">
         <topbar class="topbar"/>
-        <Nuxt class="page" keep-alive />
+        <Nuxt class="page" />
       </div>
       <sidebar class="slidebar" v-show="sidebarShow"/>
     </div>

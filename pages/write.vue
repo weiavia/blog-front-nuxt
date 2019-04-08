@@ -1,7 +1,7 @@
 <template>
   <div class="write" v-loading="loading" style="position: relative;">
     <input type="text" class="title" placeholder="将进酒" v-model="title"/>
-    <input type="text" class="desc" placeholder="君不见，黄河之水天上来，奔流到海不复回  君不见，高堂明镜悲白发，朝如青丝暮成雪" v-model="described"/>
+    <input type="text" class="desc" placeholder="君不见，黄河之水天上来，奔流到海不复回  君不见，高堂明镜悲白发，朝如青丝暮成雪" v-model="subTitle"/>
     <no-ssr>
       <mavon-editor v-model="value" class="v-note-wrapper" v-show="showEditor" 
         fontSize="16px" 
@@ -11,53 +11,113 @@
         :ishljs = "ishljs"
         placeholder="烹羊宰牛且为乐，会须一饮三百杯"
         :toolbarsFlag="toolbarsFlag"
-        @save="save"
+        @save="writeEnd"
       />
     </no-ssr>
+    <el-dialog
+      :lock-scroll="false"
+      :title="title"
+      :visible.sync="dialogVisible"
+      :center="true">
+
+      <el-dropdown @command="handleClass">
+        <el-button type="primary">
+          {{classValue || '选择分类'}}<i class="el-icon-arrow-down el-icon--right"></i>
+        </el-button>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item :command='item.type' :key="index" v-for="(item, index) in classMenu">{{item.name}}</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+
+      <div slot="footer">
+        <el-button type="primary" @click="onSave">选好了</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import toolbars from '@/config/editor'
-import { write } from '@/api/block'
+import { write, updateOne } from '@/api/block'
+import { classMenu } from '@/config'
 
 export default {
   data () {
     return {
       title: '',
-      described: '',
+      subTitle: '',
       value: '',
+      type: 0,
       boxShadow: false,
       toolbars: toolbars,
       ishljs: true,
       toolbarsFlag: true,
       loading: false,
-      showEditor: true
+      showEditor: true,
+      dialogVisible: false,
+      classMenu,
+      classValue: 0,
+      isModify: false,
+      id: 0,
+      content: ''
     };
   },
-  mounted() {
-    // bus.$on('save', this.save)
+  async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
+    // article页面跳过来修改？
+    if(params.isModify) {
+      return { 
+        isModify: params.isModify,
+        value: params.article.article.content,
+        title: params.article.title,
+        subTitle: params.article.subTitle,
+        type: params.article.type,
+        id: params.article.id
+      }
+    }
   },
   methods: {
-    async save(v, r) {
-      let data = {
-        article: v,
-        title: this.title,
-        subTitle: this.described
+    writeEnd(content) {
+      this.content = content
+      // 如果是新增选择分类
+      if(!this.isModify) {
+        this.dialogVisible = true
+      } else {
+        this.onSave()
       }
-      await write(data)
+    },
+    async onSave() {
+      let data = {
+        article: this.content,
+        title: this.title,
+        subTitle: this.subTitle,
+        type: this.type
+      }
+
+      // 修改还是新增？
+      if(this.id && this.isModify) {
+        await updateOne(this.id, data)
+        this.$notify.success({ title: '提示', message: '修改成功!', position: 'bottom-right' });
+      } else {
+        let block = await write(data)
+        this.id = block.id
+        this.isModify = true
+        this.$notify.success({ title: '提示', message: '新增成功!', position: 'bottom-right' });
+      }
       
-      this.$notify.success({
-        title: '提示',
-        message: '保存成功!',
-        position: 'bottom-right'
-      });
+      this.dialogVisible = false
+    },
+    handleClass(type) {
+      this.type = type
+      let menu = classMenu.find((menu) => {
+        return menu.type === type
+      })
+      this.classValue = menu.name
     }
   }
 }
 </script>
 
-<style lang='sass' scoped>
+<style lang='sass' scoped>  
   .write
     background: #fff
     color: #333

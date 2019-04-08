@@ -14,6 +14,8 @@
       color: #666
       .iconfont
         font-size: 14px
+      .icon-gangbi
+        font-size: 18px
       .item
         padding: 5px
     .content
@@ -39,10 +41,11 @@
   <scroll class="article" ref="scroller"  v-if="article">
     <h1>{{article.title}}</h1>
     <div class="info">
-      <time class="item"><i class="iconfont icon-shijian" /> 2018.06.02 12:20:21</time>
+      <time class="item"><i class="iconfont icon-shijian" /> {{article.creteTime | time}}</time>
       <span class="look_num item"><i class="iconfont icon-chakan" /> 999+</span>
       <span class="like_num item"><i class="iconfont icon-xihuan" /> 39</span>
-      <span class="class item"><i class='iconfont icon-all' /> 大前端</span>
+      <span class="class item"><i class='iconfont icon-all' /> {{article.type | className}}</span>
+      <i class="iconfont icon-gangbi pointer" @click="onModify"/>
     </div>
     
     <div class="content">
@@ -74,10 +77,10 @@ import Comment from '@/components/comment/index'
 import Reply from '@/components/reply/reply'
 import { findOneById } from '@/api/block'
 import { COMMENT_TYPE } from '@/config/enum.js'
-import { returnStatement } from '@babel/types'
-
+import { articleFilter } from '@/mixin'
 
 export default {
+  mixins: [articleFilter],
   data () {
     return {
       article: null,
@@ -108,12 +111,19 @@ export default {
       this.$refs.scroller.refresh()
     })
 
+    bus.$emit('showDetail', this.article.id)
     bus.$on('reply', (quote_id) => {
       this.onReply(quote_id)
     })
   },
 
   methods: {
+    onModify() {
+      this.$router.push({
+        name: 'write',
+        params: { isModify: true, article: this.article }
+      })
+    },
     onReply(quote_id) {
       this.$refs.reply.show(COMMENT_TYPE.REPLY, this.article.id, quote_id)
     },

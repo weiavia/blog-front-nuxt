@@ -8,7 +8,7 @@ export function write(param) {
   return request({
     url,
     type: 'post',
-    data: Object.assign(param, {type: BLOCK_TYPE.ARTICLE})
+    data: Object.assign(param)
   })
 }
 
@@ -20,4 +20,13 @@ export function findOneById(id) {
 export function findAll() {
   let url = apiBaseUrl + `/blocks`
   return request({ url })
+}
+
+export function updateOne(id, param) {
+  let url = apiBaseUrl + `/blocks/${id}`
+  return request({
+    url,
+    type: 'put',
+    data: param
+  })
 }
