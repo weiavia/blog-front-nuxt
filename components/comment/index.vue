@@ -23,7 +23,7 @@
 
 <template>
   <div class="container">
-    <item v-for="comment, index in comments" :comment="comment" :key="index" />
+    <item v-for="(comment, index) in comments" :comment="comment" :key="index" />
     <div class="more pointer" :class="{noMore: moreState=='没有更多了'}" @click="onMore" v-if="this.comments.length">{{moreState}}</div>
     <div class="emtpy" v-else>评论区什么都没有</div>
   </div>
@@ -32,7 +32,7 @@
 <script>
 import Item from '@/components/comment-item/index'
 import { getCommentsByThemeId } from '@/api/comment'
-import { setLike, likeIn } from '@/helper'
+import { setId, getId } from '@/helper'
 import { returnStatement } from '@babel/types';
 
 export default {
@@ -78,8 +78,9 @@ export default {
     // 服务端没有localstorge所在要在mounted后计算 isLike
     addLikeFlag() {
       this.comments.map((comment) => {
-        comment.isLike = likeIn('comment', comment.id)
+        comment.isLike = getId('comment_like', comment.id)
       })
+      // console.log(this.comments)
     }
   },
   components: {

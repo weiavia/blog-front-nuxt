@@ -11,6 +11,7 @@
 <script>
 import List from '@/components/list/list'
 import { mapGetters, mapMutations } from 'vuex'
+import { setId, getId } from '@/helper'
 
 export default {
   middleware: 'common',
@@ -23,6 +24,12 @@ export default {
     await store.dispatch('getBlocks')
   },
   mounted() {
+    // 如果localstorge没有id记录，block.look+1  
+    bus.$on("showDetail", (block_id) => {
+      if(!getId('block_show', block_id)) {
+        
+      }
+    })
     // console.log(this.blocks)
   },
   activated() {

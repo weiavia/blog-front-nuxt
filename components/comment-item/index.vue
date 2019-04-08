@@ -76,9 +76,11 @@
         <p>{{comment.quote_id.content}}</p>
       </div>
       <div class="like_wrpper">
-        <span :class="{'like': comment.isLike}" @click="onLike(comment)">
-          <i class="iconfont icon-xihuan" /> {{comment.praise_number}}
-        </span>
+        <no-ssr>
+          <span :class="{'like': comment.isLike}" @click="onLike(comment)">
+            <i class="iconfont icon-xihuan" /> {{comment.praise_number}}
+          </span>
+        </no-ssr>
         <span class="reply_btn" @click='reply'>回复</span>
       </div>
     </div>
@@ -87,7 +89,7 @@
 
 <script>
 import Item from '@/components/comment-item/index'
-import { setLike, linkIn } from '@/helper'
+import { getId, setId } from '@/helper'
 import { praise } from '@/api/common'
 import { PRAISE_TYPE } from '@/config/enum'
 
@@ -95,24 +97,22 @@ export default {
   props: ['comment'],
   data() {
     return {
-      
+      flagOk: false
     }
   },
+
   methods: {
     onLike(comment) {
       if(!this.comment.isLike) {
         praise({type: PRAISE_TYPE.COMMENT, id: this.comment.id })
         this.comment.praise_number ++
         this.comment.isLike = true
-        setLike('comment', comment.id)
+        setId('comment_like', comment.id)
       }
     },
     reply() {
       bus.$emit('reply', this.comment.id)
     }
-  },
-  components: {
-    
   }
 }
 </script>

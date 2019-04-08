@@ -66,17 +66,19 @@ const getQueryString = (name) => {
 }
 
 
-// localstoreg 存储点赞记录
-export function setLike(prefix, value) {
-  let likes = localStorage.getItem(`${prefix}_like`) || ''
-  likes = likes.split(',')
-  likes.push(value)
-  localStorage.setItem(`${prefix}_like`, likes)
+// 记录id拼接为数组存入locastorage
+export function setId(key, value) {
+  if(!getId(key, value)) {
+    let likes = localStorage.getItem(key) || ''
+    likes = likes.split(',')
+    likes.push(value)
+    localStorage.setItem(key, likes)
+  }
 }
 
-// 获取点赞记录
-export function likeIn(prefix, value) {
-  let likes = localStorage.getItem(`${prefix}_like`) || ''
+// 查找id是否存在于数组中 返回布尔值
+export function getId(key, value) {
+  let likes = localStorage.getItem(key) || ''
   likes = likes.split(',')
   let id = likes.find((n) => n == value)
   if(id) {

@@ -10,7 +10,7 @@
     <p class="sketch">{{block.subTitle}}</p>
     <div class="readAll" @click="onDetail">阅读全文</div>
     <div class="operate">
-      <i class="iconfont icon-xiaoxi"> 2k</i>
+      <i class="iconfont icon-xiaoxi"> {{block.comment_count}}</i>
       <i class="iconfont icon-chakan"> 2k</i>
       <i class="iconfont icon-xihuan"> {{block.praise_number}}</i>
     </div>
@@ -29,6 +29,7 @@ export default {
 
   methods: {
     onDetail() {
+      bus.$emit('showDetail', this.block.id)
       this.$router.push({
         path: `/article/${this.block.id}`
       })
