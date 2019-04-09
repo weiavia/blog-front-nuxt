@@ -7,7 +7,6 @@ export default {
     if(!param.take) { param.take = pageTake }
     let blocks = await homeList(param)
     // console.log(blocks)
-    console.log(param)
     commit('setBlocks', { blocks, changeClass: param.changeClass } )
   }
 }

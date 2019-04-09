@@ -11,7 +11,7 @@
     <div class="readAll" @click="onDetail">阅读全文</div>
     <div class="operate">
       <i class="iconfont icon-xiaoxi"> {{block.comment_count}}</i>
-      <i class="iconfont icon-xihuan"> {{block.praise_number}}</i>
+      <i class="iconfont icon-xihuan"> {{block.like}}</i>
       <i class="iconfont icon-chakan"> {{block.look}}</i>
     </div>
   </div>

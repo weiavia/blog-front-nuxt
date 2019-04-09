@@ -16,6 +16,8 @@
         font-size: 14px
       .icon-gangbi
         font-size: 18px
+      .like
+        color: red
       .item
         padding: 5px
     .content
@@ -42,8 +44,8 @@
     <h1>{{article.title}}</h1>
     <div class="info">
       <time class="item"><i class="iconfont icon-shijian" /> {{article.creteTime | time}}</time>
-      <span class="look_num item"><i class="iconfont icon-chakan" /> 999+</span>
-      <span class="like_num item"><i class="iconfont icon-xihuan" /> 39</span>
+      <span class="look_num item"><i class="iconfont icon-chakan" /> {{article.look}}</span>
+      <span class="like_num item" @click="onLove"><i class="iconfont icon-xihuan pointer" :class="{like: isLike}"/> {{article.like}}</span>
       <span class="class item"><i class='iconfont icon-all' /> {{article.type | className}}</span>
       <i class="iconfont icon-gangbi pointer" @click="onModify"/>
     </div>
@@ -78,6 +80,10 @@ import Reply from '@/components/reply/reply'
 import { findOneById } from '@/api/block'
 import { COMMENT_TYPE } from '@/config/enum.js'
 import { articleFilter } from '@/mixin'
+import { setId, getId } from '@/helper'
+import { updateOne } from '@/api/block'
+
+const LIKE_ADD = 2
 
 export default {
   mixins: [articleFilter],
@@ -86,7 +92,8 @@ export default {
       article: null,
       boxShadow: true,
       toolbarsFlag: false,
-      showEditor: true
+      showEditor: true,
+      isLike: false
     }
   },
 
@@ -115,9 +122,23 @@ export default {
     bus.$on('reply', (quote_id) => {
       this.onReply(quote_id)
     })
+
+    if(getId('block_love', this.article.id)) {
+      this.isLike = true
+    }
   },
 
   methods: {
+    onLove() {
+      if(!getId('block_love', this.article.id)) {
+        setId('block_love', this.article.id)
+        updateOne(this.article.id, {
+          updateType: LIKE_ADD
+        })
+        this.article.like ++
+        this.isLike = true
+      }
+    },
     onModify() {
       this.$router.push({
         name: 'write',
