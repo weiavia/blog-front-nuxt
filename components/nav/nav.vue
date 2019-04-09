@@ -46,6 +46,11 @@ export default {
           type: 4
         },
         {
+          name: 'linux',
+          icon: 'icon-linux',
+          type: 8
+        },
+        {
           name: '所有的',
           icon: 'icon-all',
           type: 0

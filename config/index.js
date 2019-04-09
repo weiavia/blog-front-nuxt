@@ -10,7 +10,8 @@ export const CLASS_TYPE = {
   MUSIC: 4,
   ALGORITHM: 5,
   ENGLISH: 6,
-  PYTHON: 7
+  PYTHON: 7,
+  LINUX: 8
 }
 
 export const classMenu = [
@@ -41,6 +42,10 @@ export const classMenu = [
   {
     name: 'python',
     type: CLASS_TYPE.PYTHON
+  },
+  {
+    name: 'linux',
+    type: CLASS_TYPE.LINUX
   }
 ]
 
