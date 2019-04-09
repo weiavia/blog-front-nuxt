@@ -7,7 +7,10 @@ export default {
   },
 
   // 主题列表
-  setBlocks(state, blocks) {
+  setBlocks(state, {blocks, changeClass}) {
+    if(!changeClass) {
+      blocks = state.blocks.concat(blocks)
+    }
     state.blocks = blocks
   },
 

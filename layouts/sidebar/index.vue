@@ -27,7 +27,7 @@
   }
   h2 {
     font-size: 14px;
-    color: $color_level_2;
+    color: $color_level_1;
   }
 }
 </style>

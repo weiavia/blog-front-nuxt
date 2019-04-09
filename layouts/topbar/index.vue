@@ -75,14 +75,14 @@ export default {
       this.penShow = false
       this.backShow = true
       this.$router.push({
-        path: '/write'
+        name: 'write'
       })
     },
     home() {
+      this.penShow = true
       this.$router.replace('/')
     },
     back() {
-      this.penShow = true
       this.backShow = false
       this.$router.back()
     },

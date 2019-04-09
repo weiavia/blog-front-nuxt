@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
       <div class="list" :class="{hide: !showMore}">
-        <nav-item :item='item' :index='index' :current='current' v-for="(item, index) in items" :key="index" @click.native="select(index)"/>
+        <nav-item :item='item' :index='index' :current='current' v-for="(item, index) in items" :key="index" @click.native="select(index, item.type)"/>
       </div>
       <div class="more pointer" @click="showMore=!showMore">{{showMore ? 'hide' : 'more'}}</div>
   </div>
@@ -17,31 +17,38 @@ export default {
       items: [
         {
           name: '大前端',
-          icon: 'icon-html'
+          icon: 'icon-html',
+          type: 1
         },
         {
           name: 'Python',
-          icon: 'icon-python'
+          icon: 'icon-python',
+          type: 7
         },
         {
           name: '算法&数据结构',
-          icon: 'icon-zhinengsuanfa'
+          icon: 'icon-zhinengsuanfa',
+          type: 5
         },
         {
           name: '数学',
-          icon: 'icon-shuxue'
+          icon: 'icon-shuxue',
+          type: 3
         },
         {
           name: '英语',
-          icon: 'icon-yingyushuiping'
+          icon: 'icon-yingyushuiping',
+          type: 6
         },
         {
           name: '音乐',
-          icon: 'icon-yinle'
+          icon: 'icon-yinle',
+          type: 4
         },
         {
           name: '所有的',
-          icon: 'icon-all'
+          icon: 'icon-all',
+          type: 0
         }
       ]
     };
@@ -50,7 +57,15 @@ export default {
     this.current = this.items.length - 1
   },
   methods: {
-    select(index) {
+    select(index, type) {
+      if(this.$route.name === 'index') {
+        bus.$emit('onClass', type)
+      } else {
+        this.$router.push({
+          name: 'index',
+          params: { type }
+        })
+      }
       this.current = index
     }
   },

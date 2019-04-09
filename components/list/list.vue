@@ -17,6 +17,7 @@
   .container {
     position: relative;
     padding-bottom: 60px;
+  
   }
   .list {
     position: relative;
@@ -26,6 +27,14 @@
       position: absolute;
       transition: all 0.3s;
     }
+  }
+  .empty {
+    font-size: 40px;
+    text-align: center;
+    height: calc(100vh - 50px);
+    background: $color_section_background;
+    padding-top: 200px;
+    box-sizing: border-box;
   }
   .bottom_line {
     width: 100%;
@@ -41,15 +50,16 @@
 </style>
 
 <template>
-  <scroll class="block">
+  <scroll class="block" @onEnd="onEnd" ref="scroll">
     <div class="load_shade" ref="loadShade" />
     <div ref="wrapper" class="container">
-      <div class="list" ref="content">
+      <div class="list" ref="content" v-show="blocks.length">
         <template v-for="(item, index) in blocks">
           <t-block :block="item"  class="item"/>
         </template>
       </div>
-      <div class="bottom_line">我是有底线的</div>
+      <div class="empty"  v-show="!blocks.length">什么都没有</div>
+      <div class="bottom_line" v-show="blocks.length">我是有底线的</div>
     </div>
   </scroll>
 </template>
@@ -58,6 +68,7 @@
 import TBlock from '@/blocks/text'
 import MBlock from '@/blocks/music'
 import Scroll from '@/components/scroll/scroll'
+import { mapActions } from 'vuex'
 
 export default {
   props: {
@@ -71,6 +82,8 @@ export default {
       column: 3,
       columnWidth: 303.33333,
       columnGap: 20,
+      skip: 0,
+      type: 0,
       data: [
         '伯牙善鼓琴，钟子期善听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死，伯牙谓世再无知音，乃破琴绝弦，终身不复鼓。',
         '伯牙善鼓琴，钟子期善听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死，伯牙谓世再无知音，乃破琴绝弦，终身不复鼓。',
@@ -89,6 +102,9 @@ export default {
     this.flag = true
 
     this.waterFall()
+    this.$refs.scroll.refresh()
+    this.$refs.scroll.toTop()
+
     window.addEventListener('resize', () => {
       if(!this.flag)
         return
@@ -96,8 +112,23 @@ export default {
         this.waterFall()
       }, 300)
     })
+
+    bus.$on('onClass', async (type) => {
+      this.type = type
+      this.skip = 0
+      await this.getBlocks({type: this.type, skip: this.skip, changeClass: true})
+      
+      this.$refs.scroll.toTop()
+      this.waterFall()
+      this.$refs.scroll.refresh()
+    })
   },
   methods: {
+    async onEnd() {
+      await this.getBlocks({type: this.type, skip: ++ this.skip})
+      this.waterFall()
+    },
+    ...mapActions(['getBlocks']),
     waterFall() {
       // 根据容器宽度算出共有几列
       // this.column = Math.max( Math.floor( this.$refs.wrapper.offsetWidth / this.columnWidth ), 1 )

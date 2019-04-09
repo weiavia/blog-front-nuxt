@@ -24,7 +24,7 @@ export default {
     };
   },
   async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
-    await store.dispatch('getBlocks')
+    await store.dispatch('getBlocks', {type: params.type || 0,  skip: 0, changeClass: true})
   },
   mounted() {
     // 如果localstorge没有id记录，block.look+1  

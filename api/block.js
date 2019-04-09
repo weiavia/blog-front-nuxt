@@ -17,8 +17,8 @@ export function findOneById(id) {
   return request({ url })
 }
 
-export function findAll() {
-  let url = apiBaseUrl + `/blocks`
+export function homeList({type, skip, take}) {
+  let url = apiBaseUrl + `/blocks?type=${type}&skip=${skip}&take=${take}`
   return request({ url })
 }
 
