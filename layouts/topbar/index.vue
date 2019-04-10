@@ -27,7 +27,7 @@
 
 <template>
   <div class="topbar clearfix">
-    <span>歌词：月半弯 倚於深宵 晚风轻飘</span>
+    <span>欢迎来到我的小站，这里有我的总结学习笔记 、还有一些想对自己说的话。</span>
     <!-- <em class="link pointer fr" @click="back" v-show="backShow">BACK</em> -->
     
     <div class="fr right_wrpper">
