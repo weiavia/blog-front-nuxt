@@ -1,3 +1,3 @@
-export default function ({ store, redirect }) {
-  store.commit('setInIndex', true)
+export default function ({ store, redirect, route }) {
+  store.commit('setRoute', route.name)
 }

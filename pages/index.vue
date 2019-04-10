@@ -1,7 +1,3 @@
-<style lang='scss' scoped>
-
-</style>
-
 <template>
   <section class="home">
     <list ref="list" :blocks="blocks" />

@@ -4,6 +4,7 @@
     <input type="text" class="desc" placeholder="君不见，黄河之水天上来，奔流到海不复回  君不见，高堂明镜悲白发，朝如青丝暮成雪" v-model="subTitle"/>
     <no-ssr>
       <mavon-editor v-model="value" class="v-note-wrapper" v-show="showEditor" 
+        ref="md"
         fontSize="16px" 
         defaultOpen="edit"
         :boxShadow="boxShadow"
@@ -12,6 +13,7 @@
         placeholder="烹羊宰牛且为乐，会须一饮三百杯"
         :toolbarsFlag="toolbarsFlag"
         @save="writeEnd"
+        @imgAdd="imgAdd"
       />
     </no-ssr>
     <el-dialog
@@ -40,8 +42,10 @@
 import toolbars from '@/config/editor'
 import { write, updateOne } from '@/api/block'
 import { classMenu } from '@/config'
+import { uploadFile } from '@/api/common'
 
 export default {
+  middleware: 'common',
   data () {
     return {
       title: '',
@@ -76,6 +80,10 @@ export default {
     }
   },
   methods: {
+    async imgAdd(pos, file) {
+      let response = await uploadFile(file)
+      this.$refs.md.$img2Url(pos, response.data.data)
+    },
     writeEnd(content) {
       this.content = content
       // 如果是新增选择分类

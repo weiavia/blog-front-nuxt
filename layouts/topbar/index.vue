@@ -31,8 +31,8 @@
     <!-- <em class="link pointer fr" @click="back" v-show="backShow">BACK</em> -->
     
     <div class="fr right_wrpper">
-      <i class="iconfont icon-xiazai44  pointer" @click="home" v-show="!inIndex"/>
-      <i class="iconfont icon-gangbi pointer" @click="write" v-show="penShow"/>
+      <i class="iconfont icon-xiazai44  pointer" @click="home" v-show="route !== 'index'"/>
+      <i class="iconfont icon-gangbi pointer" @click="write" v-show="route !== 'write'"/>
       <el-switch
         class='switch'
         v-model="onOff"
@@ -40,7 +40,6 @@
         inactive-color="#ff4949">
       </el-switch>
     </div>
-    
   </div>
 </template>
 
@@ -65,7 +64,7 @@ export default {
         this.setSidebarShow(boolean)
       }
     },
-    ...mapGetters(['sidebarShow', 'inIndex'])
+    ...mapGetters(['sidebarShow', 'route'])
   },
   methods: {
     save() {

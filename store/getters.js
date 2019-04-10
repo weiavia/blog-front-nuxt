@@ -3,8 +3,8 @@ export default {
     return state.sidebarShow
   },
   
-  inIndex(state) {
-    return state.inIndex
+  route(state) {
+    return state.route
   },
 
   comments(state) {

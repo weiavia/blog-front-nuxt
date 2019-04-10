@@ -2,8 +2,8 @@ export default {
   setSidebarShow(state, boolean) {
     state.sidebarShow = boolean
   },
-  setInIndex(state, boolean) {
-    state.inIndex = boolean
+  setRoute(state, boolean) {
+    state.route = boolean
   },
 
   // 主题列表

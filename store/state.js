@@ -2,8 +2,8 @@ export default () => ({
   // 是否显示sidebar
   sidebarShow: true,
 
-  // 当面路由是否在首页
-  inIndex: false,
+  // 所在页路由主要用于topbar的ICON状态改变
+  route: '',
 
   // 主题列表
   blocks: [],

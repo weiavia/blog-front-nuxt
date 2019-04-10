@@ -86,6 +86,7 @@ import { updateOne } from '@/api/block'
 const LIKE_ADD = 2
 
 export default {
+  middleware: 'common',
   mixins: [articleFilter],
   data () {
     return {

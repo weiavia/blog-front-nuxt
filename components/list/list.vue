@@ -59,7 +59,7 @@
         </template>
       </div>
       <div class="empty"  v-show="!blocks.length">什么都没有</div>
-      <div class="bottom_line" v-show="blocks.length">我是有底线的</div>
+      <div class="bottom_line" v-show="blocks.length">我是底线</div>
     </div>
   </scroll>
 </template>
@@ -118,9 +118,11 @@ export default {
       this.skip = 0
       await this.getBlocks({type: this.type, skip: this.skip, changeClass: true})
       
-      this.$refs.scroll.toTop()
-      this.waterFall()
-      this.$refs.scroll.refresh()
+      if(this.$refs.scroll) {
+        this.$refs.scroll.toTop()
+        this.waterFall()
+        this.$refs.scroll.refresh()
+      }
     })
   },
   methods: {
@@ -159,7 +161,8 @@ export default {
       this.flag = true
 
       var max = this.getMin(true)
-      this.$refs.wrapper.style.height = max.value + 'px'
+
+      this.$refs.wrapper.style.height = Math.max((document.documentElement.clientHeight - 120), max.value) + 'px'
       
       this.$nextTick(() => {
         let loadShade = this.$refs.loadShade

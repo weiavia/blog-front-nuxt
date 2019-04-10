@@ -1,6 +1,6 @@
 import request from './request'
 import { apiBaseUrl } from '@/config'
-import { COMMENT_PAGE_TAKE } from '@/config/enum'
+import axios from 'axios'
 
 export function praise(param) {
   let url = apiBaseUrl + '/praise'
@@ -12,3 +12,14 @@ export function praise(param) {
   })
 }
 
+export function uploadFile(file) {
+  let url = apiBaseUrl + '/file'
+  let formdata = new FormData();
+  formdata.append('file', file);
+  return axios({
+      url: url,
+      method: 'post',
+      data: formdata,
+      headers: { 'Content-Type': 'multipart/form-data' },
+  })
+}
