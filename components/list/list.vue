@@ -55,7 +55,7 @@
     <div ref="wrapper" class="container">
       <div class="list" ref="content" v-show="blocks.length">
         <template v-for="(item, index) in blocks">
-          <t-block :block="item"  class="item"/>
+          <t-block :block="item"  class="item" :key="index"/>
         </template>
       </div>
       <div class="empty"  v-show="!blocks.length">什么都没有</div>

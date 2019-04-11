@@ -37,14 +37,8 @@ export default {
   activated() {
     this.$refs.list.waterFall()
   },
-  deactivated() {
-    this.setInIndex(false)
-  },
   computed: {
     ...mapGetters(['sidebarShow', 'blocks'])
-  },
-  methods: {
-    ...mapMutations(['setInIndex'])
   },
   watch: {
     sidebarShow() {

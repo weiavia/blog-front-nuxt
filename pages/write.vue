@@ -67,6 +67,7 @@ export default {
     };
   },
   async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
+    console.log(params)
     // article页面跳过来修改？
     if(params.isModify) {
       return { 
@@ -148,4 +149,6 @@ export default {
        width: 100%
   .v-note-wrapper
     height: calc(100% - 100px)
+  .v-note-wrapper.fullscreen
+    height: auto !important
 </style>
