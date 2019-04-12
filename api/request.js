@@ -29,6 +29,7 @@ export default (param) => {
             type: 'warning'
           });
         } else {
+          reject(message)
           console.log(message)
         }
       }
