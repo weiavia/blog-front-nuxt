@@ -1,7 +1,6 @@
-export const apiBaseUrl = 'http://127.0.0.1:3001/api/v1'
+export const apiBaseUrl = 'http://94.191.104.238:3001//api/v1'
 
 export const pageTake = 10
-
 
 export const CLASS_TYPE = {
   FRONT: 1,
