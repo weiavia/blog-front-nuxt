@@ -23,3 +23,17 @@ export function uploadFile(file) {
       headers: { 'Content-Type': 'multipart/form-data' },
   })
 }
+
+export function getToken(param) {
+  let url = apiBaseUrl + '/auth'
+  return request({
+    url,
+    type: 'post',
+    data: param
+  })
+}
+
+export function checkToken() {
+  let url = apiBaseUrl + '/auth/check'
+  return request({ url })
+}

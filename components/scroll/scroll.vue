@@ -21,9 +21,12 @@ export default {
 	},
 	methods: {
 		init() {
+			
 			this.scroller = new PerfectScrollbar(this.container, {})
 			this.container.addEventListener('ps-y-reach-end', () => {
-				this.$emit('onEnd')
+				if(this.container.scrollTop > 0) {
+					this.$emit('onEnd')
+				}
 			})
 		},
 		refresh() {

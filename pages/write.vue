@@ -42,7 +42,7 @@
 import toolbars from '@/config/editor'
 import { write, updateOne } from '@/api/block'
 import { classMenu } from '@/config'
-import { uploadFile } from '@/api/common'
+import { uploadFile, checkToken } from '@/api/common'
 
 export default {
   middleware: 'common',
@@ -67,7 +67,6 @@ export default {
     };
   },
   async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
-    console.log(params)
     // article页面跳过来修改？
     if(params.isModify) {
       return { 
@@ -79,6 +78,9 @@ export default {
         id: params.article.id
       }
     }
+  },
+  mounted() {
+    checkToken()
   },
   methods: {
     async imgAdd(pos, file) {
