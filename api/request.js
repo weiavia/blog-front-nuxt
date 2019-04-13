@@ -36,12 +36,16 @@ export default (param) => {
         if( message instanceof Array ) {
           message = message.split(';')[0]
         }
-        
-        window.vm.$message({
-          showClose: true,
-          message: `API: ${message}, `,
-          type: 'warning'
-        });
+        if(!process.server) {
+          window && window.vm.$message({
+            showClose: true,
+            message: `API: ${message}, `,
+            type: 'warning'
+          });
+        } else {
+          reject(message)
+          console.log(message)
+        }
       }
     })
   })
