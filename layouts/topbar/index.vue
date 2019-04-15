@@ -6,6 +6,16 @@
   line-height: 35px;
   padding: 0 15px;
   box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  .left_wrpper {
+    flex-grow: 1;
+  }
+  .right_wrpper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
   .link {
     text-decoration: underline;
   }
@@ -14,23 +24,29 @@
     margin-right: 8px;
     color: #777
   }
-  .right_wrpper {
-    display: flex;
-    align-items: center;
-    height: 100%;
-  }
   .placeholder {
     visibility: hidden;
+  }
+  .search {
+    width: 90%;
+    outline: none;
+    background: none;
+    border: none;
+
   }
 }
 </style>
 
 <template>
   <div class="topbar clearfix">
-    <span>欢迎来到我的小站，这里有我的总结学习笔记 、还有一些想对自己说的话。</span>
     <!-- <em class="link pointer fr" @click="back" v-show="backShow">BACK</em> -->
-    
-    <div class="fr right_wrpper">
+    <div class="left_wrpper">
+      <span v-if="!searchShow">欢迎来到我的小站，这里有我的总结学习笔记 、还有一些想对自己说的话。</span>
+      <input type="text" class="search" ref="searchInput" v-show='searchShow'/>
+    </div>
+
+    <div class="right_wrpper">
+      <i class="iconfont pointer" :class="searchShow ? 'icon-guanbi' :'icon-sousuo'" @click="searchShow = !searchShow"/>
       <i class="iconfont icon-xiazai44  pointer" @click="home" v-show="route !== 'index'"/>
       <i class="iconfont icon-gangbi pointer" @click="write" v-show="route !== 'write'"/>
       <el-switch
@@ -51,6 +67,7 @@ export default {
     return {
       backShow: false,
       penShow: true,
+      searchShow: true,
       offon: true
     }
   },
@@ -86,6 +103,15 @@ export default {
       this.$router.back()
     },
     ...mapMutations(['setSidebarShow'])
+  },
+  watch: {
+    searchShow(boolean) {
+      if(boolean) {
+        this.$nextTick(() => {
+          this.$refs.searchInput.focus()
+        })
+      }
+    }
   }
 }
 </script>

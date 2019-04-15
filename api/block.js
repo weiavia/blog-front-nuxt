@@ -17,6 +17,11 @@ export function findOneById(id) {
   return request({ url })
 }
 
+export function searchByKeyWord(keyword) {
+  let url = apiBaseUrl + `/blocks/search?keyword=${keyword}`
+  return request({ url })
+}
+
 export function homeList({type, skip, take}) {
   let url = apiBaseUrl + `/blocks?type=${type}&skip=${skip}&take=${take}`
   return request({ url })
