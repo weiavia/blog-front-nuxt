@@ -8,7 +8,9 @@
 import List from '@/components/list/list'
 import { mapGetters, mapMutations } from 'vuex'
 import { setId, getId } from '@/helper'
-import { updateOne } from '@/api/block'
+import { updateOne, searchByKeyWord } from '@/api/block'
+import { fromEvent } from 'rxjs';
+import { debounceTime, pluck, switchMap } from 'rxjs/operators';
 
 const LOOK_ADD = 1
 
@@ -32,7 +34,24 @@ export default {
         })
       }
     })
-    // console.log(this.blocks)
+
+    // 使用rxjs监听topbar上搜索框的keyup事件
+    const searchKeyUp = fromEvent(document.querySelector('#searchInput'), 'keyup')
+    const searchKeyUpObserver = searchKeyUp.pipe(
+                                  debounceTime(250), 
+                                  pluck('target', 'value'),
+                                  switchMap((keyword) => searchByKeyWord(keyword))
+                                )
+    searchKeyUpObserver.subscribe((blocks) => {
+ 
+      this.setBlocks({blocks: blocks})
+      this.$nextTick(() => {
+        this.$refs.list.waterFall()
+      })
+    })
+  },
+  methods: {
+    ...mapMutations(['setBlocks'])
   },
   activated() {
     this.$refs.list.waterFall()

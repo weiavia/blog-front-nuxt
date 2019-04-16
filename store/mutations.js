@@ -7,8 +7,8 @@ export default {
   },
 
   // 主题列表
-  setBlocks(state, {blocks, changeClass}) {
-    if(!changeClass) {
+  setBlocks(state, {blocks, isConcat}) {
+    if(isConcat) {
       blocks = state.blocks.concat(blocks)
     }
     state.blocks = blocks

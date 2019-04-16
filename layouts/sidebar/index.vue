@@ -30,6 +30,20 @@
     color: $color_level_1;
   }
 }
+
+.concat {
+  padding: 0 10px;
+  width: 100%;
+  box-sizing: border-box;
+  // text-align: center;
+  h3 {
+    font-size: 14px;
+    padding: 30px 0 10px;
+  }
+  img {
+    width: 100%;
+  }
+}
 </style>
 
 <template>
@@ -44,6 +58,13 @@
       </hgroup>
     </div>
     <t-nav />
+
+    <div class="concat">
+      <h3>我的Email</h3>
+      <p>weiaican@outlook.com</p>
+      <h3>我的微信</h3>
+      <img src="./images/weixin.jpg" />
+    </div>
   </scroll>
 </template>
 

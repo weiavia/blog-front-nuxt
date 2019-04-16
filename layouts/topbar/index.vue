@@ -32,7 +32,6 @@
     outline: none;
     background: none;
     border: none;
-
   }
 }
 </style>
@@ -42,7 +41,7 @@
     <!-- <em class="link pointer fr" @click="back" v-show="backShow">BACK</em> -->
     <div class="left_wrpper">
       <span v-if="!searchShow">欢迎来到我的小站，这里有我的总结学习笔记 、还有一些想对自己说的话。</span>
-      <input type="text" class="search" ref="searchInput" v-show='searchShow'/>
+      <input type="text" class="search" id="searchInput" ref="searchInput" v-show='searchShow'/>
     </div>
 
     <div class="right_wrpper">
@@ -67,7 +66,7 @@ export default {
     return {
       backShow: false,
       penShow: true,
-      searchShow: true,
+      searchShow: false,
       offon: true
     }
   },
@@ -82,6 +81,9 @@ export default {
       }
     },
     ...mapGetters(['sidebarShow', 'route'])
+  },
+  mounted() {
+    
   },
   methods: {
     save() {
@@ -110,6 +112,9 @@ export default {
         this.$nextTick(() => {
           this.$refs.searchInput.focus()
         })
+      } else {
+        this.$refs.searchInput.value = ''
+        window.bus.$emit('onClass', 0)
       }
     }
   }

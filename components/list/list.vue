@@ -116,7 +116,7 @@ export default {
     bus.$on('onClass', async (type) => {
       this.type = type
       this.skip = 0
-      await this.getBlocks({type: this.type, skip: this.skip, changeClass: true})
+      await this.getBlocks({type: this.type, skip: this.skip})
       
       if(this.$refs.scroll) {
         this.$refs.scroll.toTop()
@@ -127,7 +127,7 @@ export default {
   },
   methods: {
     async onEnd() {
-      await this.getBlocks({type: this.type, skip: ++ this.skip})
+      await this.getBlocks({type: this.type, skip: ++ this.skip, isConcat: true})
       this.waterFall()
     },
     ...mapActions(['getBlocks']),
