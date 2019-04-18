@@ -30,26 +30,35 @@
     color: $color_level_1;
   }
 }
+.section_title {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #555;
+  font-weight: bold;
+}
 
 .concat {
-  padding: 0 10px;
+  padding: 30px 10px 0;
   width: 100%;
   box-sizing: border-box;
-  // text-align: center;
-  h3 {
-    font-size: 14px;
-    padding: 30px 0 10px;
-  }
+
   img {
     width: 100%;
   }
+}
+
+.neighbor {
+  padding: 30px 10px 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 </style>
 
 <template>
   <scroll class="sidebar">
     <div class="user">
-      <div class="face">
+      <div class="face pointer">
         <img src="./images/0.jpg">
       </div>
       <hgroup class="title">
@@ -59,25 +68,32 @@
     </div>
     <t-nav />
 
-    <div class="concat">
-      <h3>我的Email</h3>
-      <p>weiaican@outlook.com</p>
-      <h3>我的微信</h3>
+    
+    <section class="neighbor">
+      <h3 class="section_title">左右邻居</h3>
+      <neighbor />
+    </section>
+    
+    <section class="concat">
+      <h3 class="section_title">我的微信</h3>   
       <img src="./images/weixin.jpg" />
-    </div>
+    </section>
   </scroll>
 </template>
 
 <script>
 import Scroll from '@/components/scroll/scroll'
 import TNav from '@/components/nav/nav'
+import Neighbor from '@/components/neighbor/neighbor'
+
 export default {
   data() {
     return {}
   },
   components: {
     Scroll,
-    TNav
+    TNav,
+    Neighbor
   }
 }
 </script>
