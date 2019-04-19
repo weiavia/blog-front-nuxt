@@ -53,6 +53,29 @@
   width: 100%;
   box-sizing: border-box;
 }
+
+.about {
+  margin-top: 20px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  .content {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    border-bottom: 1px dashed #666;
+    padding-bottom: 20px;
+  }
+  .item {
+    text-align: center;
+    padding: 0 10px;
+    .iconfont {
+      font-size: 40px;
+      color: #555;
+      display: block;
+      margin-bottom: 6px;
+    }
+  }
+}
 </style>
 
 <template>
@@ -68,7 +91,21 @@
     </div>
     <t-nav />
 
-    
+    <section class="about">
+      <h3 class="section_title">ABOUT ME</h3>
+      <div class="content">
+        <div class="item pointer" @click="resume">
+          <i class="iconfont icon-guanyuwo"/>
+          <p>Resume</p>
+        </div>
+
+        <div class="item pointer" @click="github">
+          <i class="iconfont icon-github1"/>
+          <p>Github</p>
+        </div>
+      </div>
+    </section>
+
     <section class="neighbor">
       <h3 class="section_title">左右邻居</h3>
       <neighbor />
@@ -89,6 +126,17 @@ import Neighbor from '@/components/neighbor/neighbor'
 export default {
   data() {
     return {}
+  },
+  methods: {
+    resume() {
+      this.$router.push({
+        name: 'resume'
+      })
+    },
+
+    github() {
+      window.open('https://github.com/weiavia')
+    }
   },
   components: {
     Scroll,

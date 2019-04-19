@@ -1,20 +1,8 @@
 <template>
   <div class="nav">
       <div class="list" :class="{hide: !showMore}">
-        <el-tooltip content="曹杰峰的博客" placement="top" :enterable="false">
-          <div class="item pointer">曹</div>
-        </el-tooltip>
-        <el-tooltip content="禹都一只猫" placement="top" :enterable="false">
-          <div class="item pointer">禹</div>
-        </el-tooltip>
-        <el-tooltip content="曹杰峰的博客" placement="top" :enterable="false">
-          <div class="item pointer">曹</div>
-        </el-tooltip>
-        <el-tooltip content="曹杰峰的博客" placement="top" :enterable="false">
-          <div class="item pointer">曹</div>
-        </el-tooltip>
-        <el-tooltip content="曹杰峰的博客" placement="top" :enterable="false">
-          <div class="item pointer">曹</div>
+        <el-tooltip :content="item.name" placement="top" :enterable="false" v-for="item,index in items" :key="index">
+          <div class="item pointer" @click="jump(item.url)">{{ item.name | firstChar}}</div>
         </el-tooltip>
       </div>
       <div class="more pointer" @click="showMore=!showMore">{{showMore ? 'hide' : 'more'}}</div>
@@ -30,44 +18,24 @@ export default {
       current: 0,
       items: [
         {
-          name: '',
-          icon: 'icon-html',
-          type: 1
+          name: '雷小天的博客',
+          url: 'https://www.100txy.com/'
         },
         {
-          name: 'Python',
-          icon: 'icon-python',
-          type: 7
+          name: '曹杰峰的博客',
+          url: 'https://www.caojiefeng.com'
         },
         {
-          name: '算法&数据结构',
-          icon: 'icon-zhinengsuanfa',
-          type: 5
+          name: '堵文斐个人博客',
+          url: 'https://duwenfei.com/'
         },
         {
-          name: '数学',
-          icon: 'icon-shuxue',
-          type: 3
+          name: '禹都一只猫',
+          url: 'https://olei.me/'
         },
         {
-          name: '英语',
-          icon: 'icon-yingyushuiping',
-          type: 6
-        },
-        {
-          name: '音乐',
-          icon: 'icon-yinle',
-          type: 4
-        },
-        {
-          name: 'linux',
-          icon: 'icon-linux',
-          type: 8
-        },
-        {
-          name: '所有的',
-          icon: 'icon-all',
-          type: 0
+          name: '崔庆才的个人博客',
+          url: 'https://cuiqingcai.com/'
         }
       ]
     };
@@ -76,8 +44,16 @@ export default {
     this.current = this.items.length - 1
   },
   methods: {
+    jump(url) {
+      window.open(url)
+    },
     select() {
       
+    }
+  },
+  filters: {
+    firstChar(str) {
+      return str.charAt(0)
     }
   },
   components: {
@@ -88,7 +64,7 @@ export default {
 
 <style lang='scss' scoped>
 .nav {
-  margin-top: 30px;
+  margin-top: 20px;
   .list {
     display: flex;
     flex-wrap: wrap;
@@ -106,7 +82,7 @@ export default {
       line-height: 60px;
       position: relative;
       font-size: 24px;
-      color: #555;
+      color: $color_level_2;
       position: relative;
       img {
         position: absolute;
@@ -127,7 +103,6 @@ export default {
   }
   .more {
     text-align: center;
-
     background: rgba(255, 255, 255, 0.5);
     height: 20px;
     line-height: 20px;
