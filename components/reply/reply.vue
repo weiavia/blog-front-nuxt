@@ -31,6 +31,7 @@
         <el-form-item>
           <el-input type="textarea" v-model="form.content" class="mb10" placeholder="内容写在这"/>
         </el-form-item>
+        <P>😀😁😂😃😄😅😆😉😊😋😎😍😘😗😙😛😜😝😒😓😔</P>
       </el-form>
       <div slot="footer">
         <el-button type="primary" @click="onSave">写完了</el-button>

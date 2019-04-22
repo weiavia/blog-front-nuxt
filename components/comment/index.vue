@@ -45,16 +45,18 @@ export default {
     }
   },
   created() {
-    this.count = this.article.comment.count
-    this.comments = this.article.comment.comments
+    if(this.article) {
+      this.count = this.article.comment.count
+      this.comments = this.article.comment.comments
 
-    // 设置初始值
-    this.comments.map((comment) => {
-      comment.isLike = false
-    })
+      // 设置初始值
+      this.comments.map((comment) => {
+        comment.isLike = false
+      })
 
-    if(this.count <= this.comments.length) {
-      this.moreState = '没有更多了'
+      if(this.count <= this.comments.length) {
+        this.moreState = '没有更多了'
+      }
     }
   },
   mounted() {
