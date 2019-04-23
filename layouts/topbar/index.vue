@@ -42,6 +42,7 @@
     <div class="left_wrpper">
       <!-- <span v-if="!searchShow">欢迎来到我的小站，这里有我的总结学习笔记 、还有一些想对自己说的话。</span> -->
       <input type="text" class="search" id="searchInput" ref="searchInput" v-show='searchShow'/>
+      <MusicBar />
     </div>
 
     <div class="right_wrpper">
@@ -60,6 +61,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+import MusicBar from '@/components/music-bar/music-bar'
 
 export default {
   data() {
@@ -117,6 +119,9 @@ export default {
         window.bus.$emit('onClass', 0)
       }
     }
+  },
+  components: {
+    MusicBar
   }
 }
 </script>

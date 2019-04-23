@@ -77,11 +77,10 @@
 import Scroll from '@/components/scroll/scroll'
 import Comment from '@/components/comment/index'
 import Reply from '@/components/reply/reply'
-import { findOneById } from '@/api/block'
+import { findOneById, updateOne } from '@/api/block'
 import { COMMENT_TYPE } from '@/config/enum.js'
 import { articleFilter } from '@/mixin'
 import { setId, getId } from '@/helper'
-import { updateOne } from '@/api/block'
 
 const LIKE_ADD = 2
 

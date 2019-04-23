@@ -1,4 +1,4 @@
-export const apiBaseUrl = 'http://127.0.0.1:3001/api/v1'
+export const apiBaseUrl = 'http://94.191.104.238:3001/api/v1'
 
 export const pageTake = 10
 
@@ -10,7 +10,8 @@ export const CLASS_TYPE = {
   ALGORITHM: 5,
   ENGLISH: 6,
   PYTHON: 7,
-  LINUX: 8
+  LINUX: 8,
+  RESUME: 99
 }
 
 export const classMenu = [
@@ -45,6 +46,10 @@ export const classMenu = [
   {
     name: 'linux',
     type: CLASS_TYPE.LINUX
+  },
+  {
+    name: 'resume',
+    type: CLASS_TYPE.RESUME
   }
 ]
 

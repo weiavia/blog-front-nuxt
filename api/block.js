@@ -1,6 +1,10 @@
 import request from './request'
 import { apiBaseUrl } from '@/config'
-import { BLOCK_TYPE } from '../config/enum'
+
+export function GetResume() {
+  let url = apiBaseUrl + `/blocks/resume`
+  return request({ url })
+}
 
 export function write(param) {
   let url = apiBaseUrl + '/blocks'
@@ -16,6 +20,7 @@ export function findOneById(id) {
   let url = apiBaseUrl + `/blocks/${id}`
   return request({ url })
 }
+
 
 export function searchByKeyWord(keyword) {
   let url = apiBaseUrl + `/blocks/search?keyword=${keyword}`

@@ -19,7 +19,7 @@
 
 <script>
 import { formatTime } from '@/helper'
-import { classMenu } from '@/config'
+import { classMenu, CLASS_TYPE } from '@/config'
 import { articleFilter } from '@/mixin'
 
 export default {
@@ -31,9 +31,15 @@ export default {
   },
   methods: {
     onDetail() {
-      this.$router.push({
-        path: `/article/${this.block.id}`
-      })
+      if(this.block.type === CLASS_TYPE.RESUME) {
+        this.$router.push({
+          name: 'resume'
+        })
+      } else {
+        this.$router.push({
+          path: `/article/${this.block.id}`
+        })
+      }
     }
   }
 }

@@ -112,7 +112,7 @@
     </section>
     
     <section class="concat">
-      <h3 class="section_title">我的微信</h3>   
+      <h3 class="section_title">Wechat</h3>   
       <img src="./images/weixin.jpg" />
     </section>
   </scroll>

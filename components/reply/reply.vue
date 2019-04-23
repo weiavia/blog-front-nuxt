@@ -11,6 +11,19 @@
         width: 48%;
       }
     }
+
+    .emoji {
+      display: flex;
+      justify-content: center;
+      
+      flex-wrap: wrap;
+      span {
+        padding: 0 5px;
+        font-size: 20px;
+        cursor: pointer;
+        margin-bottom: 12px;
+      }
+    }
   }
 </style>
 
@@ -28,10 +41,12 @@
           <el-input v-model="form.name" placeholder="你的名字，2 < name.length < 6" class="input mb10"></el-input>
           <el-input v-model="form.url" placeholder="你的主页" class="input"></el-input>
         </div>
+        <p class="emoji">
+          <span v-for="item in emoji" @click="onEmoji">{{item}}</span>
+        </p>
         <el-form-item>
           <el-input type="textarea" v-model="form.content" class="mb10" placeholder="内容写在这"/>
         </el-form-item>
-        <P>😀😁😂😃😄😅😆😉😊😋😎😍😘😗😙😛😜😝😒😓😔</P>
       </el-form>
       <div slot="footer">
         <el-button type="primary" @click="onSave">写完了</el-button>
@@ -46,22 +61,31 @@ import { createComment } from '@/api/comment'
 import { deleteNullKey } from '@/helper'
 
 export default {
+  props: {
+    isResume: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       dialogVisible: false,
       form: {
+        content: '',
         concat: '',
         name: '',
         url: '',
         block_id: 0,
         quote_id: 0
       },
+      emoji: ['😀', '😁', '😂', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', '😍', '😘', '😗', '😙', '😛', '😜', '😝', '😒', '😓', '😔'],
       title: ''
     };
   },
   methods: {
     async onSave() {
       let data = deleteNullKey(this.form)
+      data.isResume = this.isResume
       await createComment(data)
 
       this.form.name = ''
@@ -74,6 +98,12 @@ export default {
         message: '你的评论提交成功，大侠审核后可见！',
         type: 'success'
       });
+    },
+
+    onEmoji(event) {
+      let content = this.form.content
+      content = content + event.target.innerHTML
+      this.form.content = content
     },
 
     handleClose() {

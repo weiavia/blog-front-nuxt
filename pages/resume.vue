@@ -1,8 +1,9 @@
 <style lang='scss' scoped>
   .resume {
-    background: rgba(255,255,255, .5);
+    background: rgba(255,255,255, .8);
     color: #333;
-    padding-top: 30px;
+    padding: 30px 0;
+    box-sizing: border-box;
     .statement {
       margin-bottom: 20px;
       .me {
@@ -86,9 +87,9 @@
       <p>数据库: Mysql</p>
       <p>服务器: Centos7.5 (腾讯云服务器)</p>
     </div>
-    <p class="opreation"><a href="javascript:;" @click="reply">给我留言</a></p>
-    <reply ref="reply"/>
-    <comment />
+    <p class="opreation"><a href="javascript:;" @click="onComment">给我留言</a></p>
+    <reply ref="reply" :isResume="true"/>
+    <comment :article="resume" @reply="onReply"/>
   </scroll>
 </template>
 
@@ -97,20 +98,32 @@ import Reply from '@/components/reply/reply'
 import Comment from '@/components/comment'
 import Scroll from '@/components/scroll/scroll'
 import { COMMENT_TYPE } from '@/config/enum.js'
+import { GetResume } from '@/api/block'
+import { nullLiteral } from '@babel/types';
 
 export default {
   middleware: 'common',
+  async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
+    let resume = await GetResume()
+    return { resume }
+  },
   data () {
     return {
+      resume: null
     };
   },
   mounted() {
-    this.$refs.reply.show(COMMENT_TYPE.ARTICLE, 1)
+    bus.$on('reply', (quote_id) => {
+      this.onReply(quote_id)
+    })
   },
   methods: {
-    reply() {
+    onComment() {
       this.$refs.reply.show(COMMENT_TYPE.ARTICLE, 1)
-    }
+    },
+    onReply(quote_id) {
+      this.$refs.reply.show(COMMENT_TYPE.REPLY, this.resume.id, quote_id)
+    },
   },
   components: {
     Scroll,
