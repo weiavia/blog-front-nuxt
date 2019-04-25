@@ -138,8 +138,8 @@ export function parseLrc(lrc) {
             
 
               oLRC.ms.push({//对象{t:时间,c:歌词}加入ms数组
-                  t: resultTime,
-                  c: content
+                  time: resultTime,
+                  text: content
               });
           }
       }

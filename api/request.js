@@ -60,7 +60,7 @@ function authForm() {
       localStorage.setItem('token', token)
     })
   }).catch(() => {
-    console.log(window.location.host  )
+    console.log(window.location.host)
     window.location.href = 'http://www.mtjj.xyz'
   });
 }

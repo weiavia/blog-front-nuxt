@@ -14,6 +14,15 @@
     display: inline-block;
     border-radius: 50%;
     transform: translateY(50%);
+    animation: rotates 5s linear infinite;
+  }
+}
+@keyframes rotates {
+  from {
+    transform: translateY(50%) rotate(0deg);
+  }
+  to {
+    transform: translateY(50%) rotate(360deg);
   }
 }
 .title {

@@ -49,5 +49,4 @@ export default {
       text-decoration: underline
     .icon-gangbi
       font-size: 22px
-
 </style>

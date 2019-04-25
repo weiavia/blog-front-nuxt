@@ -21,7 +21,7 @@
     <i class="iconfont icon-xiayigexiayishou" title="下一首"></i>
 
     <span class="word" ref="word">......</span>
-    <audio src="http://h5.bukeyi.net/h5/via/music.mp3" class="hide" ref="audio"/>
+    <audio src="http://94.191.104.238:3001/static/mp32.mp3" class="hide" ref="audio"/>
   </div>
 </template>
 
@@ -38,58 +38,68 @@ export default {
     };
   },
   async mounted() {
+    this.audio = this.$refs.audio
+    this.word = this.$refs.word
+
     // 加载解析歌词
-    let lrc = await axios.get('http://94.191.104.238:3001/static/lrc.lrc')
-    this.lrc = parseLrc(lrc.data).ms
-
-    // 播放音乐
-    let audio = this.$refs.audio
-    // audio.currentTime = 270
-
-    audio.addEventListener('canplay', () => {
-      audio.play()
-      this.lyric()
+   axios.get('http://94.191.104.238:3001/static/lrc2.lrc').then((lrc) => {
+      this.lrc = parseLrc(lrc.data).ms
+      this.initLyric()
+      this.audio.play()
     })
 
-    audio.addEventListener('ended', () => {
-      clearInterval(this.lrcTime)
-    })
+    this.audio.addEventListener('ended', this.ended)
+    this.audio.addEventListener('timeupdate', this.lrcRun)
   },
   methods: {
-    lyric() {
-      this.word = this.$refs.word
-      this.lrcTime = null
-      this.startTime = new Date()
+    initLyric() {
       this.totalTime = 0
       this.currentLine = 1
-      this.nextTime = this.lrc[this.currentLine].t
-      this.word.innerHTML = this.lrc[this.currentLine - 1].c
-      
-      this.lrcRun()
+      this.nextTime = this.lrc[this.currentLine].time
+      this.word.innerHTML = this.lrc[this.currentLine - 1].text
+      this.progress = 0
+      this.progressStartTime = 0
     },
     lrcRun() {
-      let progress = 0
-      let progressStartTime = 0
-
-      this.lrcTime = setInterval(() => {
-        // 歌曲播放
-        this.totalTime = new Date() - this.startTime
-        // 歌曲播放累积时间大于歌词出现时间
-        if(this.totalTime > this.nextTime) {
-          this.currentLine ++
-          // 最后一句歌词
-          if(this.currentLine > this.lrc.length - 1) {
-            clearInterval(this.lrcTime)
-          } else {
-            this.word.innerHTML = this.lrc[this.currentLine -1].c
-            this.nextTime = this.lrc[this.currentLine].t
-            progressStartTime = this.totalTime
-          }
+      // 歌曲播放
+      this.totalTime = this.audio.currentTime * 1000
+      // 歌曲播放累积时间大于歌词出现时间
+      if(this.totalTime >= this.nextTime) {
+        this.currentLine ++
+        // 最后一句歌词
+        if(this.currentLine > this.lrc.length - 1) {
+          this.word.innerHTML = this.lrc[this.lrc.length - 1].text
+          this.nextTime = this.audio.duration * 1000
+        } else {
+          this.word.innerHTML = this.lrc[this.currentLine -1].text
+          this.nextTime = this.lrc[this.currentLine].time
         }
-        // 更新TEXT
-        progress = (this.totalTime - progressStartTime) / (this.nextTime - this.totalTime) * 100
-        this.word.style.backgroundImage = `linear-gradient(to right, #058 ${progress}%, #666 0%)`
-      }, 40)
+        this.progressStartTime = this.totalTime
+      }
+      // 更新TEXT
+      this.progress = (this.totalTime - this.progressStartTime) / (this.nextTime - this.totalTime) * 100
+      this.word.style.backgroundImage = `linear-gradient(to right, #058 ${this.progress}%, #666 0%)`
+    },
+    jump(second) {
+      this.audio.currentTime = second
+      // 计算出歌词所在行
+      let currentTime = second * 1000
+      this.lrc.forEach((lrc, index) => {
+        if(currentTime >= lrc.time && this.lrc[index + 1].time && currentTime < this.lrc[index + 1].time) {
+          this.currentLine = index
+          return
+        }
+      });
+    },
+    next() {
+      this.initLyric()
+
+    },
+    ended() {
+      
+    },
+    play() {
+
     },
     changePlayState(boolean) {
       if(!boolean) {
