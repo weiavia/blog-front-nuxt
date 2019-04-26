@@ -20,6 +20,7 @@ body {
   background: #e2cfba url("https://www.miaov.com/static/normal/images/index/bg.jpg") no-repeat center top;
   z-index: -1;
   filter: brightness(0.7);
+  overflow: hidden;
 }
 
 .hide {
@@ -70,7 +71,6 @@ body {
 }
 
 
-
 .content-input-wrapper {
   padding: 15px !important;
 }
@@ -82,4 +82,24 @@ body {
 .el-dialog {
   width: 80%;
   max-width: 900px;
+}
+
+.section_background {
+  position: relative;
+  overflow: hidden;
+}
+
+.section_background::before {
+  overflow: hidden;
+  margin-left: -90px;
+  filter: brightness(0.9) blur(20px);
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: #e2cfba url("https://www.miaov.com/static/normal/images/index/bg.jpg") no-repeat center top;
+  background-attachment: fixed;
 }

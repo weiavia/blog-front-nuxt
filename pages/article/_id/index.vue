@@ -1,6 +1,5 @@
 <style lang='sass' scoped>
   .article
-    background: rgba(255,255,255, .8)
     color: #333
     h1 
       font-size: 30px
@@ -26,7 +25,8 @@
       & /deep/ .v-note-wrapper 
         background: none
       & /deep/ .v-note-panel
-        border: none
+        border: none !important
+        box-shadow: none !important
       & /deep/ .v-show-content
         background: none !important
   .operation
@@ -40,7 +40,7 @@
 </style>
 
 <template>
-  <scroll class="article" ref="scroller"  v-if="article">
+  <scroll class="article section_background" ref="scroller"  v-if="article">
     <h1>{{article.title}}</h1>
     <div class="info">
       <time class="item"><i class="iconfont icon-shijian" /> {{article.creteTime | time}}</time>
@@ -119,9 +119,7 @@ export default {
     })
 
     bus.$emit('showDetail', this.article.id)
-    bus.$on('reply', (quote_id) => {
-      this.onReply(quote_id)
-    })
+
 
     if(getId('block_love', this.article.id)) {
       this.isLike = true

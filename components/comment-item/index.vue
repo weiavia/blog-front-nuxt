@@ -3,7 +3,7 @@
     font-size: 14px
     display: flex
     padding: 10px 0
-    border-bottom: 1px dotted #ccc
+    border-bottom: 1px dotted $color_level_2
     .face
       width: 50px
       height: 50px
@@ -111,7 +111,7 @@ export default {
       }
     },
     reply() {
-      bus.$emit('reply', this.comment.id)
+      this.$emit('reply', this.comment.id)
     }
   }
 }

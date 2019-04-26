@@ -58,7 +58,7 @@
           <t-block :block="item"  class="item" :key="index"/>
         </template>
       </div>
-      <div class="empty"  v-show="!blocks.length">什么都没有</div>
+      <div class="empty"  v-show="!blocks.length">空空如也</div>
       <div class="bottom_line" v-show="blocks.length">我是底线</div>
     </div>
   </scroll>

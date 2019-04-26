@@ -1,6 +1,6 @@
 <style lang='scss' scoped>
 .sidebar {
-  background: $color_section_background;
+
 }
 .face {
   text-align: center;
@@ -8,21 +8,47 @@
   background: url('./images/1.jpg');
   background-size: cover;
   margin-bottom: 50px;
-  img {
+  position: relative;
+  .face_wrapper {
     width: 100px;
     height: 100px;
-    display: inline-block;
     border-radius: 50%;
+    overflow: hidden;
     transform: translateY(50%);
+    position: absolute;
+    left: 50%;
+    margin-left: -50px;
+  }
+
+  .face_wrapper:hover img:last-child {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .face_wrapper img:first-child  {
     animation: rotates 5s linear infinite;
+  }
+  .face_wrapper img:last-child {
+    opacity: 0;
+    z-index: 2;
+    transform: scale(0.1) rotate(360deg);
+    border-radius: 50%;
+    transition: all .5s;
   }
 }
 @keyframes rotates {
   from {
-    transform: translateY(50%) rotate(0deg);
+    transform: rotate(0deg);
   }
   to {
-    transform: translateY(50%) rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 .title {
@@ -88,10 +114,13 @@
 </style>
 
 <template>
-  <scroll class="sidebar">
+  <scroll class="sidebar section_background">
     <div class="user">
       <div class="face pointer">
-        <img src="./images/0.jpg">
+        <div class="face_wrapper">
+          <img src="./images/0.jpg">
+          <img src="./images/me.jpg" />
+        </div>
       </div>
       <hgroup class="title">
         <h1>路过一只大侠</h1>

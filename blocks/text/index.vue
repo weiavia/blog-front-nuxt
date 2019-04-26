@@ -3,7 +3,7 @@
 </style>
 
 <template>
-  <div class="tBlock block_item">
+  <div class="tBlock block_item section_background">
     <p class="class">{{block.type | className}}</p>
     <h2 class="title">{{block.title}}</h2>
     <time>{{block.creteTime | time}}</time>

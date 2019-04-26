@@ -23,9 +23,9 @@
 
 <template>
   <div class="container">
-    <item v-for="(comment, index) in comments" :comment="comment" :key="index" />
+    <item v-for="(comment, index) in comments" :comment="comment" :key="index" @reply="reply"/>
     <div class="more pointer" :class="{noMore: moreState=='没有更多了'}" @click="onMore" v-if="this.comments.length">{{moreState}}</div>
-    <div class="emtpy" v-else>评论区什么都没有</div>
+    <div class="emtpy" v-else>评论区空空如也</div>
   </div>
 </template>
 
@@ -63,6 +63,9 @@ export default {
     this.addLikeFlag()
   },
   methods: {
+    reply(quote_id) {
+      this.$emit('reply', quote_id)
+    },
     async onMore() {
       if(this.moreState !== '没有更多了') {
         this.moreState = '加载中'
