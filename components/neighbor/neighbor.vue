@@ -18,6 +18,10 @@ export default {
       current: 0,
       items: [
         {
+          name: 'Bzqll的博客',
+          url: 'https://www.bzqll.com/2019/01/262.html'
+        },
+        {
           name: '雷小天的博客',
           url: 'https://www.100txy.com/'
         },
