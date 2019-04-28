@@ -46,7 +46,7 @@ export default {
  
       this.setBlocks({blocks: blocks})
       this.$nextTick(() => {
-        this.$refs.list.waterFall()
+        this.$refs.list && this.$refs.list.waterFall()
       })
     })
   },

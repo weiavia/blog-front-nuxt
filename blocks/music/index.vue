@@ -1,5 +1,5 @@
 <template>
-  <div class="mBlock block_item">
+  <div class="mBlock block_item section_background">
     <p class="class">音乐</p>
     <h2 class="title">月半湾</h2>
     <time>2018.06.02</time>
@@ -8,8 +8,8 @@
     </div>
     <div class="operate">
       <!-- <i class="iconfont icon-xiaoxi"> 2k</i> -->
-      <i class="iconfont icon-bofang "> 927</i>
-      <i class="iconfont icon-xihuan pointer"> 2k</i>
+      <!-- <i class="iconfont icon-bofang "> 927</i>
+      <i class="iconfont icon-xihuan pointer"> 2k</i> -->
     </div>
   </div>
 </template>
@@ -26,6 +26,8 @@ export default {
 </script>
 
 <style lang='sass' scoped>
+  @import url('../../static/style/block-common.scss');
+
   .mBlock
     .operate
       border-top: none

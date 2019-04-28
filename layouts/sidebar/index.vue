@@ -1,6 +1,6 @@
 <style lang='scss' scoped>
 .sidebar {
-
+ 
 }
 .face {
   text-align: center;
@@ -77,9 +77,14 @@
   padding: 30px 10px 0;
   width: 100%;
   box-sizing: border-box;
-
+  text-align: center;
   img {
     width: 100%;
+  }
+  .email {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #666;
   }
 }
 
@@ -150,7 +155,10 @@
     </section>
     
     <section class="concat">
-      <h3 class="section_title">Wechat</h3>   
+      <h3 class="section_title"><i class="iconfont icon-youxiang" /> email</h3>   
+      <p class="email">weiaican@outlook.com</p>
+
+      <h3 class="section_title"><i class="iconfont icon-weixin" /> wechat</h3>   
       <img src="./images/weixin.jpg" />
     </section>
   </scroll>

@@ -38,7 +38,6 @@
 
 <template>
   <div class="topbar section_background clearfix">
-    <em class="link pointer fr" @click="back" v-show="backShow">BACK</em>
     <div class="left_wrpper">
       <!-- <span v-if="!searchShow">欢迎来到我的小站，这里有我的总结学习笔记 、还有一些想对自己说的话。</span> -->
       <input type="text" class="search" id="searchInput" ref="searchInput" v-show='searchShow'/>

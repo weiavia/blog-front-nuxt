@@ -18,10 +18,10 @@
   <div class="music">
     <i class="iconfont icon-bofang" v-if="!playState" @click="changePlayState(true)" title="播放"></i>
     <i class="iconfont icon-zanting" v-if="playState" @click="changePlayState(false)" title="暂停"></i>
-    <i class="iconfont icon-xiayigexiayishou" title="下一首"></i>
+    <i class="iconfont icon-xiayigexiayishou" title="下一首" @click="next"></i>
 
-    <span class="word" ref="word">......</span>
-    <audio src="http://94.191.104.238:3001/static/mp32.mp3" class="hide" ref="audio"/>
+    <span class="word" ref="word">Music Lyric</span>
+    <audio :src="song.url" class="hide" ref="audio" />
   </div>
 </template>
 
@@ -29,29 +29,40 @@
 import axios from 'axios'
 import { parseLrc } from '@/helper'
 import { setTimeout, setInterval, clearInterval } from 'timers';
+import songs from './song'
+
+let index = Math.floor(Math.random() * songs.length)
 
 export default {
   data () {
     return {
-      playState: true,
-      lrc: null
+      playState: false,
+      lrc: null,
+      song: songs[index],
+      index: index
     };
   },
   async mounted() {
     this.audio = this.$refs.audio
     this.word = this.$refs.word
 
-    // 加载解析歌词
-   axios.get('http://94.191.104.238:3001/static/lrc2.lrc').then((lrc) => {
-      this.lrc = parseLrc(lrc.data).ms
-      this.initLyric()
-      this.audio.play()
-    })
-
     this.audio.addEventListener('ended', this.ended)
     this.audio.addEventListener('timeupdate', this.lrcRun)
+
+    if(sessionStorage.getItem('autoplay') === 'true') {
+      this.playState = true
+      this.play()
+    }
   },
   methods: {
+    play() {
+      // 加载解析歌词
+      axios.get(`https://v1.itooi.cn/tencent/lrc?id=${this.song.id}`).then((lrc) => {
+        this.lrc = parseLrc(lrc.data).ms
+        this.initLyric()
+        this.audio.play()
+      })
+    },
     initLyric() {
       this.totalTime = 0
       this.currentLine = 1
@@ -92,22 +103,32 @@ export default {
       });
     },
     next() {
-      this.initLyric()
+      this.index ++
+      if(this.index > songs.length - 1) {
+        this.index = 0
+      }
+      this.song = songs[this.index]
+      this.play()
 
+      this.playState = true
     },
     ended() {
-      
-    },
-    play() {
-
+      this.next()
     },
     changePlayState(boolean) {
       if(!boolean) {
         this.$refs.audio.pause()
         clearInterval(this.lrcTime)
+        sessionStorage.setItem('autoplay', 'false')
       } else {
-        this.$refs.audio.play()
-        this.lrcRun()
+        // 不存在歌词表示第一次播放。否则表示暂停后播放
+        if(!this.lrc) {
+          this.play()
+        } else {
+          this.$refs.audio.play()
+          this.lrcRun()
+        }
+        sessionStorage.setItem('autoplay', 'true')
       }
       this.playState = boolean
     }
