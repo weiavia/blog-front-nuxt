@@ -49,7 +49,8 @@ export default {
     this.audio.addEventListener('ended', this.ended)
     this.audio.addEventListener('timeupdate', this.lrcRun)
 
-    if(sessionStorage.getItem('autoplay') === 'true') {
+    let autoplay = sessionStorage.getItem('autoplay')
+    if(autoplay === 'true' || autoplay !== 'false') {
       this.playState = true
       this.play()
     }

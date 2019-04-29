@@ -103,3 +103,12 @@ body {
   background: #e2cfba url("https://www.miaov.com/static/normal/images/index/bg.jpg") no-repeat center top;
   background-attachment: fixed;
 }
+
+// rewrite
+.markdown-body pre {
+  padding: 0 !important;
+}
+
+.markdown-body h6 {
+  color: #333 !important;
+}

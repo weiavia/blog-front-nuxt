@@ -1,6 +1,7 @@
 <style lang='sass' scoped>
   .article
     color: #333
+    background: rgba(255,255,255, .3)
     h1 
       font-size: 30px
       font-weight: bold
@@ -40,7 +41,7 @@
 </style>
 
 <template>
-  <scroll class="article section_background" ref="scroller"  v-if="article">
+  <scroll class="article " ref="scroller"  v-if="article">
     <h1>{{article.title}}</h1>
     <div class="info">
       <time class="item"><i class="iconfont icon-shijian" /> {{article.creteTime | time}}</time>
@@ -56,7 +57,7 @@
         fontSize="16px" 
         defaultOpen="preview"
         :boxShadow="boxShadow"
-        codeStyle="dark"
+        codeStyle="atelier-cave-dark"
         placeholder="烹羊宰牛且为乐，会须一饮三百杯"
         :toolbarsFlag="toolbarsFlag"
         :value="article.content"

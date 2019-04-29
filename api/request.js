@@ -55,6 +55,7 @@ function authForm() {
   window.vm.$prompt('', 'secret', {
     confirmButtonText: '好了',
     cancelButtonText: '没有',
+    inputType: 'password'
   }).then(({ value }) => {
     getToken({ secret: value }).then((token) => {
       localStorage.setItem('token', token)
