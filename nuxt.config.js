@@ -16,7 +16,7 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'http://at.alicdn.com/t/font_658757_dq4twcnmczj.css' }
+      { rel: 'stylesheet', href: 'http://at.alicdn.com/t/font_658757_ha3aa0tuvlg.css' }
     ]
   },
 
@@ -39,6 +39,7 @@ module.exports = {
   */
   plugins: [
     '@/plugins/element-ui',
+    '@/plugins/viever',
     { src: '@/plugins/vue-mavon-editor', srr: false }
   ],
 

@@ -150,6 +150,11 @@
             <p>Resume</p>
           </div>
 
+          <div class="item pointer" @click="timeline">
+             <i class="iconfont icon-shijianzhou pointer" title="时间轴" />
+            <p>Timeline</p>
+          </div>
+
           <div class="item pointer" @click="github">
             <i class="iconfont icon-github1"/>
             <p>Github</p>
@@ -183,12 +188,14 @@ export default {
     return {}
   },
   methods: {
+    timeline() {
+      this.$router.push({ name: 'timeline' })
+    },
     resume() {
       this.$router.push({
         name: 'resume'
       })
     },
-
     github() {
       window.open('https://github.com/weiavia')
     }

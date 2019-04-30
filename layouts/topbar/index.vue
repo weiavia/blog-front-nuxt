@@ -46,6 +46,7 @@
 
     <div class="right_wrpper">
       <i class="iconfont pointer" :class="searchShow ? 'icon-guanbi' :'icon-sousuo'" @click="searchShow = !searchShow"/>
+     
       <i class="iconfont icon-xiazai44  pointer" @click="home" v-show="route !== 'index'"/>
       <i class="iconfont icon-gangbi pointer" @click="write" v-show="route !== 'write'"/>
       <el-switch
@@ -101,6 +102,7 @@ export default {
       this.penShow = true
       this.$router.replace('/')
     },
+    
     back() {
       this.backShow = false
       this.$router.back()
