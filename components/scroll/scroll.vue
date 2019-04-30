@@ -17,7 +17,11 @@ export default {
   mounted() {
 		this.container = this.$refs.container
 		this.scroller = null
-		this.init()
+
+		let windowWidth = document.body.clientWidth
+		if(windowWidth >=  600) {
+			this.init()
+		}
 	},
 	methods: {
 		init() {
@@ -30,7 +34,7 @@ export default {
 			})
 		},
 		refresh() {
-			this.scroller.update()
+			this.scroller && this.scroller.update()
 		},
 		toTop() {
 			this.container.scrollTop = 0

@@ -9,6 +9,10 @@
     z-index: 2;
     background: rgb(236,244,244);
     transition: all 1s;
+
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
   }
 
   .load_shade.normal {
@@ -20,12 +24,26 @@
   
   }
   .list {
-    position: relative;
+  
     margin: 0 auto;
+    @media screen and (max-width: 600px) {
+      width: 100%;
+      padding: 20px 10px 0;
+      box-sizing: border-box;
+    }
+
     .item {
       width: 303.33333px;
       position: absolute;
       transition: all 0.3s;
+
+      @media screen and (max-width: 600px) {
+        width: 100%;
+        position: static;
+        margin-bottom: 10px;
+        background: rgba(255,255,255, .5);
+        transition: none;
+      }
     }
   }
   .empty {
@@ -47,6 +65,15 @@
     left: 0;
   }
 }
+
+ @media screen and (max-width: 600px) {
+   .block {
+    .list {
+      
+
+    }
+  }
+ }
 </style>
 
 <template>
@@ -83,18 +110,7 @@ export default {
       columnWidth: 303.33333,
       columnGap: 20,
       skip: 0,
-      type: 0,
-      data: [
-        '伯牙善鼓琴，钟子期善听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死，伯牙谓世再无知音，乃破琴绝弦，终身不复鼓。',
-        '伯牙善鼓琴，钟子期善听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死，伯牙谓世再无知音，乃破琴绝弦，终身不复鼓。',
-        '伯牙善鼓琴，钟子期善听。伯牙鼓琴，志在  dsdf 高山，钟子期曰：“善哉，峨峨兮若泰山！”期死，伯牙谓世再无知音，乃破琴绝弦，终身不复鼓。',
-        '伯牙善鼓琴，钟子期善听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死，伯牙谓世再无知音，乃破琴绝弦，终身不复鼓。',
-        '伯牙善鼓琴，钟子期善听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死，伯牙谓世再无知音，乃破琴绝弦，终身不复鼓。',
-        '伯牙善鼓琴，钟子期善听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死，伯牙谓世再无知音，乃破琴绝弦，终身不复鼓。',
-        '伯牙善鼓琴，钟子期善听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死，伯牙谓世再无知音，乃破琴绝弦，终身不复鼓。',
-        '伯牙善鼓琴，钟子期善听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死，伯牙谓世再无知音，乃破琴绝弦，终身不复鼓。',
-        '伯牙善鼓琴，钟子期善听。伯牙鼓琴，志在高山，钟子期曰：“善哉，峨峨兮若泰山！”期死，伯牙谓世再无知音，乃破琴绝弦，终身不复鼓。',
-      ]
+      type: 0
     };
   },
   mounted() {
@@ -132,6 +148,12 @@ export default {
     },
     ...mapActions(['getBlocks']),
     waterFall() {
+
+      let windowWidth = document.body.clientWidth
+      if(windowWidth <  600) {
+        return
+      }
+    
       // 根据容器宽度算出共有几列
       // this.column = Math.max( Math.floor( this.$refs.wrapper.offsetWidth / this.columnWidth ), 1 )
       // // 根据列数

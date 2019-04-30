@@ -23,11 +23,33 @@
         height: calc(100% - 50px);
       }
     }
+    
 
     .slidebar {
       width: 300px;
       height: 100%;
-      margin-left: 20px;
+      margin-right: 20px;
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .container {
+      display: block;
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch;
+      padding: 0;
+      .main {
+        width: 100%;
+        height: auto;
+        .topbar {
+          display: none;
+        }
+      }
+      .slidebar {
+        width: 100%;
+        height: auto;
+        margin-left: 0;
+      }
     }
   }
 </style>
@@ -36,12 +58,12 @@
   <div>
     <div class="background" />
     <div class="container">
+      <sidebar class="slidebar" v-show="sidebarShow"/>
       <div class="main">
         <topbar class="topbar"/>
         <Nuxt class="page" />
         <!-- <Nuxt class="page" keepAlive /> -->
       </div>
-      <sidebar class="slidebar" v-show="sidebarShow"/>
     </div>
   </div>
 </template>

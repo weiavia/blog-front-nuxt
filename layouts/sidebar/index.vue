@@ -1,7 +1,14 @@
 <style lang='scss' scoped>
-.sidebar {
- 
-}
+ @media screen and (max-width: 600px) {
+   .maxShow {
+     display: none;
+   }
+   .sidebar {
+     padding-bottom: 20px;
+     background: rgba(255,255,255, .1)
+   }
+ }
+
 .face {
   text-align: center;
   height: 100px;
@@ -134,33 +141,35 @@
     </div>
     <t-nav />
 
-    <section class="about">
-      <h3 class="section_title">ABOUT ME</h3>
-      <div class="content">
-        <div class="item pointer" @click="resume">
-          <i class="iconfont icon-guanyuwo"/>
-          <p>Resume</p>
+    <div class="maxShow">
+      <section class="about">
+        <h3 class="section_title">ABOUT ME</h3>
+        <div class="content">
+          <div class="item pointer" @click="resume">
+            <i class="iconfont icon-guanyuwo"/>
+            <p>Resume</p>
+          </div>
+
+          <div class="item pointer" @click="github">
+            <i class="iconfont icon-github1"/>
+            <p>Github</p>
+          </div>
         </div>
+      </section>
 
-        <div class="item pointer" @click="github">
-          <i class="iconfont icon-github1"/>
-          <p>Github</p>
-        </div>
-      </div>
-    </section>
+      <section class="neighbor">
+        <h3 class="section_title">左右邻居</h3>
+        <neighbor />
+      </section>
+      
+      <section class="concat">
+        <h3 class="section_title"><i class="iconfont icon-youxiang" /> email</h3>   
+        <p class="email">weiaican@outlook.com</p>
 
-    <section class="neighbor">
-      <h3 class="section_title">左右邻居</h3>
-      <neighbor />
-    </section>
-    
-    <section class="concat">
-      <h3 class="section_title"><i class="iconfont icon-youxiang" /> email</h3>   
-      <p class="email">weiaican@outlook.com</p>
-
-      <h3 class="section_title"><i class="iconfont icon-weixin" /> wechat</h3>   
-      <img src="./images/weixin.jpg" />
-    </section>
+        <h3 class="section_title"><i class="iconfont icon-weixin" /> wechat</h3>   
+        <img src="./images/weixin.jpg" />
+      </section>
+    </div>
   </scroll>
 </template>
 
