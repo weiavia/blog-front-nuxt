@@ -51,10 +51,24 @@
         height: 40px;
         padding: 0 10px;
         border-bottom: 1px solid #999;
+        overflow: hidden;
+        position: relative;
+        .file_form {
+          position: absolute;
+          left: -60px;
+          top: -60px;
+          width: 100px;
+          height: 100px;
+          opacity: 0;
+          cursor: pointer;
+   
+          z-index: 2;
+     
+        }
         & > .iconfont {
           margin-right: 10px;
           color: #333;
-          cursor: pointer;
+
         }
         span {
           font-size: 12px;
@@ -91,7 +105,6 @@
     .half {
       width: 50%;
     }
-
     .imgs {
       width: 200px;
       height: 200px;
@@ -115,37 +128,107 @@
         background: rgba(255, 255, 255, .2);
       }
     }
+    .img_tag {
+      font-size: 12px;
+      padding: 6px;
+      background: rgba(255,255,255, .5);
+      display: inline-block;
+      border-radius: 0 10px 0 0;
+      .iconfont {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .nav {
+    .wapper {
+      position: relative;
+      display: inline-block;
+      padding-right: 40px;
+      padding-bottom: 10px;
+      .year {
+        font-size: 14px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        padding-top: 10px;
+
+        &.active {
+          color: #058;
+        }
+      }
+      .month {
+        font-size: 12px;
+        p {
+          margin-bottom: 5px;
+          text-decoration: underline;
+          cursor: pointer;
+          color: #555;
+          &.active {
+            color: #058;
+          }
+        }
+      }
+    }
+    .line {
+      position: absolute;
+      height: 100%;
+      width: 2px;
+      background: rgba(255,255,255, .2);
+      right: 0;
+    }
   }
 </style>
 
 <template>
   <scroll class="timeline clearfix">
     <div class="nav fl">
-      <p>2019</p>
-      <p>2018</p>
+      <div class="wapper">
+        <div class="line" />
+        <div class="nav_item">
+          <h3 class="year active">2015年</h3>
+          <div class="month">
+            <p class="active">1月</p>
+            <p>2月</p>
+            <p>3月</p>
+          </div>
+        </div>
+        <div class="nav_item">
+          <h3 class="year">2014年</h3>
+          <div class="month">
+            <p>1月</p>
+            <p>2月</p>
+            <p>3月</p>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="main fr">
       <div class="textarea">
         <i class="circle" />
         <header class="clearfix">
           <div class="fl">
+            <input type="file" multiple ref="file" accept="image/gif, image/jpeg, image/png" class="file_form"/>
             <i class="iconfont icon-tupian pointer" title="插入图片"></i>
-            <span class="tianqi">&nbsp;&nbsp;<i class="iconfont icon-tianqi" /><span> 长沙 睛 45度,</span></span>
-            <span>晚上7.30</span>
+            <span class="tianqi">&nbsp;&nbsp;<i class="iconfont icon-tianqi" /><span v-if="weather"> {{weather.city}} {{weather.data[0].wea}} {{weather.data[0].tem}}</span></span>
+            <span>{{ timeParagraph }} 7.30</span>
           </div>
           <div class="fr">
-            <span class="writed" v-show="textareaShow">写好了</span>
+            <span class="writed" v-show="textareaShow" @click="submit">写好了</span>
           </div>
         </header>
-        <textarea v-show="textareaShow"></textarea>
-        <footer></footer>
+        <textarea v-show="textareaShow" v-model="content" />
+        
+        <footer>
+          <p class="img_tag" v-show="this.imgs.length">{{this.imgs.length}}张图片 <i class="iconfont icon-guanbi pointer" @click="clearImg"/></p>
+        </footer>
       </div>
 
       <div class="item">
         <div class="triangle" />
         <div class="circle" />
-        <header>
-         <i class="iconfont icon-tianqi" /><span> 长沙 睛 45度,</span>
+        <header v-if="weather">
+          <i class="iconfont icon-tianqi" />
+          <span>{{weather.city}} {{weather.data[0].wea}} 45度,</span>
           <span>晚上7.30</span>
         </header>
         <p class="text">
@@ -162,12 +245,57 @@
 
 <script>
 import Scroll from '@/components/scroll/scroll'
+import { getWeather, uploadFile, checkToken } from '@/api/common'
+import { create } from '@/api/timeline'
+import { timeParagraph } from '@/helper'
 
 export default {
   data () {
     return {
-      textareaShow: true
+      textareaShow: true,
+      weather: null,
+      timeParagraph: '',
+      content: '',
+      imgs: []
     };
+  },
+  created() {
+    this.timeParagraph = timeParagraph()
+  },
+  mounted() {
+    this.$refs.file.addEventListener('change', this.uploadImg, false);
+
+    // jsonp 获取天气
+    let that = this
+    document.tianqi = function(res) {
+      that.weather = res
+    }
+
+    let script = document.createElement('script')
+    document.body.appendChild(script)
+    script.src = 'https://www.tianqiapi.com/api/?version=v1&callback=document.tianqi'
+  },
+  methods: {
+    clearImg() {
+      this.imgs = []
+    },
+    async uploadImg(event) {
+      let files = event.target.files
+      let res = await uploadFile(files)
+      this.imgs = res.data.data
+    },
+    async submit() {
+      let param = {
+        content: this.content,
+        address: this.weather.city,
+        weather: this.weather.data[0].wea + this.weather.data[0].tem,
+        photos: this.imgs
+      }
+      let result = await create(param)
+      this.content = ''
+      this.imgs = ''
+      this.$notify.success({ title: '提示', message: '发表成功!', position: 'top-right' });
+    }
   },
   components: {
     Scroll

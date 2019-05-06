@@ -12,15 +12,19 @@ export function praise(param) {
   })
 }
 
-export function uploadFile(file) {
+export function uploadFile(files) {
   let url = apiBaseUrl + '/file'
   let formdata = new FormData();
-  formdata.append('file', file);
+
+  for(let i=0; i<files.length; i++) {
+    formdata.append('file[]', files[i]);
+  }
+
   return axios({
-      url: url,
-      method: 'post',
-      data: formdata,
-      headers: { 'Content-Type': 'multipart/form-data' },
+    url: url,
+    method: 'post',
+    data: formdata,
+    headers: { 'Content-Type': 'multipart/form-data' },
   })
 }
 
@@ -37,3 +41,4 @@ export function checkToken() {
   let url = apiBaseUrl + '/auth/check'
   return request({ url })
 }
+

@@ -87,6 +87,7 @@ export function getId(key, value) {
   return false
 }
 
+// 解析lrc文件
 export function parseLrc(lrc) {
   var oLRC = {
     ti: "", //歌曲名
@@ -149,4 +150,31 @@ export function parseLrc(lrc) {
   });
 
   return oLRC
+}
+
+// 时间段
+export function timeParagraph() {
+  let date = new Date()
+  let hour = date.getHours()
+  let str = ''
+
+  if(hour >= 5 && hour <= 9) {
+    str = '清晨'
+  } 
+  else if (hour > 9 && hour <= 12) {
+    str = '上午'
+  }
+  else if (hour > 12 && hour <= 4) {
+    str = '中午'
+  }
+  else if (hour > 4 && hour < 6) {
+    str = '下午'
+  }
+  else if (hour >= 6 && hour <= 11) {
+    str = '晚上'
+  } else {
+    str = '傍晚'
+  }
+
+  return str
 }

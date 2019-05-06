@@ -43,6 +43,7 @@ import toolbars from '@/config/editor'
 import { write, updateOne } from '@/api/block'
 import { classMenu } from '@/config'
 import { uploadFile, checkToken } from '@/api/common'
+import { SERVER_HOST } from '@/env'
 
 export default {
   middleware: 'common',
@@ -84,8 +85,8 @@ export default {
   },
   methods: {
     async imgAdd(pos, file) {
-      let response = await uploadFile(file)
-      this.$refs.md.$img2Url(pos, response.data.data)
+      let response = await uploadFile([file])
+      this.$refs.md.$img2Url(pos, `${SERVER_HOST}/static/${response.data.data[0]}`)
     },
     writeEnd(content) {
       this.content = content

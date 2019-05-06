@@ -82,3 +82,6 @@ dist
 
 # Service worker
 sw.*
+
+# 环境配置文件
+env.js
