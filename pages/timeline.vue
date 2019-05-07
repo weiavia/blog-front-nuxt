@@ -9,20 +9,26 @@
     left: -20px;
     top: 10px;
   }
-
   .timeline {
-    .nav {
-      width: 200px;
-    }
+    // .nav {
+    //   width: 200px;
+      
+    // }
     .main {
-      width: calc(100% - 210px);
+      width: calc(100% - 10px);
+      // width: 100%;
       height: 100%;
-      border-left: 1px solid rgba(255,255,255, .2);
-      padding-left: 40px;
-      box-sizing: border-box;
+      .content {
+        padding-left: 40px;
+        padding-bottom: 40px;
+        box-sizing: border-box;
+        border-left: 1px solid rgba(255,255,255, .2);
+      }
     }
   }
   .main {
+    // transform: scale3d(1, 1, 1);
+    // padding-top: 200px;
     .circle {
       position: absolute;
       width: 10px;
@@ -35,6 +41,8 @@
     }
     .textarea {
       position: relative;
+      // top: 0;
+      z-index: 200;
       width: 100%;
       background: rgba(255,255,255, .2);
       textarea {
@@ -53,6 +61,13 @@
         border-bottom: 1px solid #999;
         overflow: hidden;
         position: relative;
+        .area_show {
+          font-size: 40px;
+          vertical-align: middle;
+          color: #555;
+          transform: rotate(90deg);
+          
+        }
         .file_form {
           position: absolute;
           left: -60px;
@@ -61,14 +76,11 @@
           height: 100px;
           opacity: 0;
           cursor: pointer;
-   
           z-index: 2;
-     
         }
         & > .iconfont {
           margin-right: 10px;
           color: #333;
-
         }
         span {
           font-size: 12px;
@@ -83,13 +95,12 @@
     .item {
       position: relative;
       width: 100%;
- 
       background: rgba(255,255,255, .2);
       margin-top: 20px;
       border-radius: 4px;
       padding: 10px;
       box-sizing: border-box;
-      font-size: 16px;
+      font-size: 14px;
       header {
         display: block;
         padding-bottom: 10px;
@@ -99,7 +110,7 @@
         }
       }
       .text {
-        color: #058;
+        color: #444;
       }
     }
     .half {
@@ -180,8 +191,8 @@
 </style>
 
 <template>
-  <scroll class="timeline clearfix">
-    <div class="nav fl">
+  <scroll class="timeline clearfix" @onEnd="more">
+    <!-- <div class="nav fl">
       <div class="wapper">
         <div class="line" />
         <div class="nav_item">
@@ -201,42 +212,43 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="main fr">
-      <div class="textarea">
-        <i class="circle" />
-        <header class="clearfix">
-          <div class="fl">
-            <input type="file" multiple ref="file" accept="image/gif, image/jpeg, image/png" class="file_form"/>
-            <i class="iconfont icon-tupian pointer" title="插入图片"></i>
-            <span class="tianqi">&nbsp;&nbsp;<i class="iconfont icon-tianqi" /><span v-if="weather"> {{weather.city}} {{weather.data[0].wea}} {{weather.data[0].tem}}</span></span>
-            <span>{{ timeParagraph }} 7.30</span>
+      <div class="content">
+        <div class="textarea">
+          <i class="circle" />
+          <header class="clearfix">
+            <div class="fl">
+              <input type="file" multiple ref="file" accept="image/gif, image/jpeg, image/png" class="file_form"/>
+              <i class="iconfont icon-tupian pointer" title="插入图片"></i>
+              <span class="tianqi">&nbsp;&nbsp;<i class="iconfont icon-tianqi" /><span v-if="weather"> {{weather.city}} {{weather.data[0].wea}} {{weather.data[0].tem}}</span></span>
+              <span>{{ timeParagraph }} 7.30</span>
+            </div>
+            <div class="fr">
+              <span class="writed" v-show="textareaShow" @click="submit" v-if="showarea">写好了</span>
+              <i class="iconfont pointer area_show active" :class="{'icon-shousuo2': showarea, 'icon-shousuo1': !showarea}" @click="showarea = !showarea"/>
+            </div>
+          </header>
+          <div v-if="showarea">
+            <textarea v-show="textareaShow" v-model="content" />
+            <footer>
+              <p class="img_tag" v-show="this.imgs.length">{{this.imgs.length}}张图片 <i class="iconfont icon-guanbi pointer" @click="clearImg"/></p>
+            </footer>
           </div>
-          <div class="fr">
-            <span class="writed" v-show="textareaShow" @click="submit">写好了</span>
+        </div>
+        <div class="item" v-for="timeline in timelines">
+          <div class="triangle" />
+          <div class="circle" />
+          <header>
+            <i class="iconfont icon-tianqi" />
+            <span>{{timeline.address}} {{timeline.weather}},</span>
+            <span>晚上{{timeline.creteTime | time}}</span>
+          </header>
+          <p class="text">{{timeline.content}}</p>
+          <div class="imgs" v-if="timeline.photos[0] && timeline.photos[0].src" :style="{background: 'url('+ sourcePrefix(timeline.photos[0].src) +') no-repeat center center'}" v-viewer>
+            <img :src="photo.src | sourcePrefix" v-for="photo in timeline.photos"/>
+            <p class="tag">{{timeline.photos.length}}张</p>
           </div>
-        </header>
-        <textarea v-show="textareaShow" v-model="content" />
-        
-        <footer>
-          <p class="img_tag" v-show="this.imgs.length">{{this.imgs.length}}张图片 <i class="iconfont icon-guanbi pointer" @click="clearImg"/></p>
-        </footer>
-      </div>
-
-      <div class="item">
-        <div class="triangle" />
-        <div class="circle" />
-        <header v-if="weather">
-          <i class="iconfont icon-tianqi" />
-          <span>{{weather.city}} {{weather.data[0].wea}} 45度,</span>
-          <span>晚上7.30</span>
-        </header>
-        <p class="text">
-          单四吃鸡，恐怖如斯
-        </p>
-        <div class="imgs" v-viewer>
-          <img src="../static/cj.jpg" />
-          <p class="tag">10张</p>
         </div>
       </div>
     </div>
@@ -246,17 +258,27 @@
 <script>
 import Scroll from '@/components/scroll/scroll'
 import { getWeather, uploadFile, checkToken } from '@/api/common'
-import { create } from '@/api/timeline'
+import { create, getTimeline } from '@/api/timeline'
 import { timeParagraph } from '@/helper'
+import { staticSourceFilter } from '@/mixin'
 
 export default {
+  mixins: [ staticSourceFilter ],
+  async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
+    // { date: new Date(2016,0,0,0).getTime() / 1000 }
+    let timelines = await getTimeline()
+    return { timelines }
+  },
   data () {
     return {
       textareaShow: true,
       weather: null,
       timeParagraph: '',
       content: '',
-      imgs: []
+      timelines: [],
+      imgs: [],
+      showarea: false,
+      page: 0
     };
   },
   created() {
@@ -264,7 +286,7 @@ export default {
   },
   mounted() {
     this.$refs.file.addEventListener('change', this.uploadImg, false);
-
+    
     // jsonp 获取天气
     let that = this
     document.tianqi = function(res) {
@@ -276,6 +298,10 @@ export default {
     script.src = 'https://www.tianqiapi.com/api/?version=v1&callback=document.tianqi'
   },
   methods: {
+    async more() {
+      let timelines = await getTimeline({page: ++ this.page})
+      this.timelines = this.timelines.concat(timelines)
+    },
     clearImg() {
       this.imgs = []
     },
@@ -292,6 +318,15 @@ export default {
         photos: this.imgs
       }
       let result = await create(param)
+      // 提交成功，前端更新列表数据
+      this.timelines.unshift({
+        content: this.content,
+        address: this.weather.city,
+        weather: this.weather.data[0].wea + this.weather.data[0].tem,
+        creteTime: new Date().getTime(),
+        photos: this.imgs
+      })
+      console.log(this.timelines)
       this.content = ''
       this.imgs = ''
       this.$notify.success({ title: '提示', message: '发表成功!', position: 'top-right' });

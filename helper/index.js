@@ -8,7 +8,7 @@ export function deleteNullKey(obj) {
 }
 
 
-export function formatTime (date, hasYear) {
+export function formatTime (date) {
   date = new Date(date)
   
   const year = date.getFullYear()
@@ -177,4 +177,17 @@ export function timeParagraph() {
   }
 
   return str
+}
+
+
+// Get请求URL拼接
+export function queryParamJoin(data){
+  let url = ''
+  for(var k in data){
+      let value = data[k] !== undefined ? data[k]:''
+      url += `&${k}=${encodeURIComponent(value)}`
+  }
+ 
+  url =  url ? url.substring(1) : ''
+  return '?' + url
 }

@@ -21,14 +21,19 @@ export default {
           type: 1
         },
         {
-          name: 'Python',
-          icon: 'icon-python',
-          type: 7
+          name: 'Node、后端',
+          icon: 'icon-nodejs',
+          type: 2
         },
         {
-          name: '算法&数据结构',
+          name: '算法',
           icon: 'icon-zhinengsuanfa',
           type: 5
+        },
+        {
+          name: 'linux',
+          icon: 'icon-linux',
+          type: 8
         },
         {
           name: '数学',
@@ -44,11 +49,6 @@ export default {
           name: '音乐',
           icon: 'icon-yinle',
           type: 4
-        },
-        {
-          name: 'linux',
-          icon: 'icon-linux',
-          type: 8
         },
         {
           name: '所有的',

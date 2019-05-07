@@ -9,7 +9,6 @@ export const CLASS_TYPE = {
   MUSIC: 4,
   ALGORITHM: 5,
   ENGLISH: 6,
-  PYTHON: 7,
   LINUX: 8,
   RESUME: 99
 }
@@ -20,7 +19,7 @@ export const classMenu = [
     type: CLASS_TYPE.FRONT
   },
   {
-    name: '后端',
+    name: 'Node、后端',
     type: CLASS_TYPE.AFTER
   },
   {
@@ -38,10 +37,6 @@ export const classMenu = [
   {
     name: '英语',
     type: CLASS_TYPE.ENGLISH
-  },
-  {
-    name: 'python',
-    type: CLASS_TYPE.PYTHON
   },
   {
     name: 'linux',
