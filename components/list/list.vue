@@ -9,10 +9,6 @@
     z-index: 2;
     background: rgb(236,244,244);
     transition: all 1s;
-
-    @media screen and (max-width: 600px) {
-      display: none;
-    }
   }
 
   .load_shade.normal {
@@ -26,24 +22,12 @@
   .list {
     position: relative;
     margin: 0 auto;
-    @media screen and (max-width: 600px) {
-      width: 100%;
-      padding: 20px 10px 0;
-      box-sizing: border-box;
-    }
+   
 
     .item {
       width: 303.33333px;
       position: absolute;
       transition: all 0.3s;
-
-      @media screen and (max-width: 600px) {
-        width: 100%;
-        position: static;
-        margin-bottom: 10px;
-        background: rgba(255,255,255, .5);
-        transition: none;
-      }
     }
   }
   .empty {
@@ -66,14 +50,6 @@
   }
 }
 
- @media screen and (max-width: 600px) {
-   .block {
-    .list {
-      
-
-    }
-  }
- }
 </style>
 
 <template>
@@ -116,6 +92,7 @@ export default {
   mounted() {
     this.items = document.getElementsByClassName('block_item')
     this.flag = true
+    
 
     this.waterFall()
     this.$refs.scroll.refresh()
@@ -144,47 +121,21 @@ export default {
   methods: {
     async onEnd() {
       await this.getBlocks({type: this.type, skip: ++ this.skip, isConcat: true})
-      this.waterFall()
+      this.positionend()
     },
     ...mapActions(['getBlocks']),
     waterFall() {
-
       let windowWidth = document.body.clientWidth
-      if(windowWidth <  600) {
-        return
-      }
+      if(windowWidth <  600) { return }
     
-      // 根据容器宽度算出共有几列
-      // this.column = Math.max( Math.floor( this.$refs.wrapper.offsetWidth / this.columnWidth ), 1 )
-      // // 根据列数
-      
-      // this.columnGap = (this.$refs.wrapper.offsetWidth - this.column * this.columnWidth) / (this.column - 1)
-      // this.$refs.content.style.width = this.columnWidth * this.column + ((this.column-1) * this.columnGap) + 'px'
-
       this.column = Math.max( Math.floor( this.$refs.wrapper.offsetWidth / this.columnWidth ), 1)
       this.$refs.content.style.width = this.columnWidth * this.column + ((this.column-1) * this.columnGap) + 'px'
-      // this.columnGap = (this.$refs.wrapper.offsetWidth - this.column * this.columnWidth) / (this.column - 1)
 
       this.hState = []
-      let index = 0
-      let items = [].slice.call(this.items)
-      items.forEach((item, i) => {
-        if(i < this.column) {
-          item.style.top = 0 + 'px'
-          item.style.left = i * (this.columnWidth + this.columnGap) + 'px'
-          this.hState.push(item.offsetHeight)
-        } else {
-          let min = this.getMin()
-          item.style.left = min.index * (this.columnWidth + this.columnGap) + 'px'
-          item.style.top = min.value + 20 + 'px'
-          this.hState[min.index] = min.value + item.offsetHeight + 20
-        }
-      })
+      this.lastIndex = 0
+      this.positionend()
+
       this.flag = true
-
-      var max = this.getMin(true)
-
-      this.$refs.wrapper.style.height = Math.max((document.documentElement.clientHeight - 120), max.value) + 'px'
       
       this.$nextTick(() => {
         let loadShade = this.$refs.loadShade
@@ -193,6 +144,26 @@ export default {
           loadShade.style.display = 'none'
         })
       })
+    },
+    positionend() {
+      for(var i=this.lastIndex; i<this.items.length; i++) {
+        let item = this.items[i]
+        if(i < this.column) {
+          item.style.top = 0 + 'px'
+          item.style.left = i * (this.columnWidth + this.columnGap) + 'px'
+          this.hState.push(item.offsetHeight)
+        } else {
+          let min = this.getMin()
+          
+          item.style.left = min.index * (this.columnWidth + this.columnGap) + 'px'
+          item.style.top = min.value + 20 + 'px'
+          this.hState[min.index] = min.value + item.offsetHeight + 20
+        }
+      }
+      this.lastIndex = i
+
+      let max = this.getMin(true)
+      this.$refs.wrapper.style.height = Math.max((document.documentElement.clientHeight - 120), max.value) + 'px'
     },
     getMin(reversal = false) {
       var o = {

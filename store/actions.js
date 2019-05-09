@@ -7,7 +7,7 @@ export default {
     if(!param.take) { param.take = pageTake }
     let blocks = await homeList(param)
     if(param.isConcat) {
-      blocks = blocks.concat(state.blocks)
+      blocks = state.blocks.concat(blocks)      
     }
     // console.log(blocks)
     commit('setBlocks', { blocks, changeClass: param.changeClass } )

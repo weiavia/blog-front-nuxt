@@ -21,7 +21,7 @@
     <i class="iconfont icon-xiayigexiayishou" title="下一首" @click="next"></i>
 
     <span class="word" ref="word">Music Lyric</span>
-    <audio :src="song.url" class="hide" ref="audio" />
+    <audio :src="song.id | songSrc" class="hide" ref="audio" />
   </div>
 </template>
 
@@ -132,6 +132,11 @@ export default {
         sessionStorage.setItem('autoplay', 'true')
       }
       this.playState = boolean
+    }
+  },
+  filters: {
+    songSrc(id) {
+      return `https://v1.itooi.cn/tencent/url?id=${id}&quality=128`
     }
   }
 }

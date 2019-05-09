@@ -104,14 +104,6 @@ body {
   background-attachment: fixed;
 }
 
-
-@media screen and (max-width: 600px) {
-  .section_background::before {
-    filter: none;
-    background-attachment: none;
-    background: url("https://www.miaov.com/static/normal/images/index/bg.jpg") cover;
-  }
-}
 // rewrite
 .markdown-body pre {
   padding: 0 !important;
@@ -119,4 +111,14 @@ body {
 
 .markdown-body h6 {
   color: #333 !important;
+}
+
+.v-note-show {
+  font-size: 15px !important;
+}
+
+
+//  scroll bar层级
+.ps__rail-y {
+  z-index: 2000 !important;
 }

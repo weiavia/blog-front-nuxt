@@ -30,7 +30,7 @@ function js_strto_time(str_time){
 export const staticSourceFilter = {
   filters: {
     sourcePrefix(src) {
-      return `http://${SERVER_HOST}/static/${src}`
+      return `${SERVER_HOST}/static/${src}`
     },
     time(date) {
       let time = formatTime(date)
@@ -39,7 +39,7 @@ export const staticSourceFilter = {
   },
   methods: {
     sourcePrefix(src) {
-      return `http://${SERVER_HOST}/static/${src}`
+      return `${SERVER_HOST}/static/${src}`
     }
   }
 }

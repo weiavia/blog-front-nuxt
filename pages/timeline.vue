@@ -27,8 +27,6 @@
     }
   }
   .main {
-    // transform: scale3d(1, 1, 1);
-    // padding-top: 200px;
     .circle {
       position: absolute;
       width: 10px;
@@ -41,7 +39,6 @@
     }
     .textarea {
       position: relative;
-      // top: 0;
       z-index: 200;
       width: 100%;
       background: rgba(255,255,255, .2);
@@ -66,7 +63,6 @@
           vertical-align: middle;
           color: #555;
           transform: rotate(90deg);
-          
         }
         .file_form {
           position: absolute;
@@ -111,6 +107,7 @@
       }
       .text {
         color: #444;
+        line-height: 1.6;
       }
     }
     .half {
@@ -119,11 +116,10 @@
     .imgs {
       width: 200px;
       height: 200px;
-      border: 1px solid #eee;
+      border: 1px solid #aaa;
       margin-top: 20px;
       cursor: pointer;
       background: url('../static/cj.jpg') no-repeat center center;
-      background-size: cover;
       position: relative;
       img {
         width: 100%;
@@ -245,7 +241,7 @@
             <span>晚上{{timeline.creteTime | time}}</span>
           </header>
           <p class="text">{{timeline.content}}</p>
-          <div class="imgs" v-if="timeline.photos[0] && timeline.photos[0].src" :style="{background: 'url('+ sourcePrefix(timeline.photos[0].src) +') no-repeat center center'}" v-viewer>
+          <div class="imgs" v-if="timeline.photos[0] && timeline.photos[0].src" :style="{background: 'url('+ sourcePrefix(timeline.photos[0].src) +') no-repeat center center', backgroundSize: 'cover'}" v-viewer>
             <img :src="photo.src | sourcePrefix" v-for="photo in timeline.photos"/>
             <p class="tag">{{timeline.photos.length}}张</p>
           </div>
@@ -263,6 +259,7 @@ import { timeParagraph } from '@/helper'
 import { staticSourceFilter } from '@/mixin'
 
 export default {
+  middleware: 'common',
   mixins: [ staticSourceFilter ],
   async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
     // { date: new Date(2016,0,0,0).getTime() / 1000 }

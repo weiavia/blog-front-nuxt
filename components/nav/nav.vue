@@ -87,9 +87,6 @@ export default {
     display: flex;
     flex-wrap: wrap;
     padding: 0 10px;
-    @media screen and (max-width: 600px) {
-      justify-content: space-around;
-    }
     &.hide {
       height: 70px;
       overflow: hidden;
@@ -104,9 +101,6 @@ export default {
       line-height: 60px;
       position: relative;
       &:nth-child(4n) {
-        margin-right: 0;
-      }
-      @media screen and (max-width: 600px) {
         margin-right: 0;
       }
       i {

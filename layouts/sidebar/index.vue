@@ -1,14 +1,4 @@
 <style lang='scss' scoped>
- @media screen and (max-width: 600px) {
-   .maxShow {
-     display: none;
-   }
-   .sidebar {
-     padding-bottom: 20px;
-     background: rgba(255,255,255, .1)
-   }
- }
-
 .face {
   text-align: center;
   height: 100px;
@@ -136,7 +126,7 @@
       </div>
       <hgroup class="title">
         <h1>路过一只大侠</h1>
-        <h2>给岁月以文明，给时光以生命</h2>
+        <h2>我又从西厢过，十二年前的白日梦</h2>
       </hgroup>
     </div>
     <t-nav />

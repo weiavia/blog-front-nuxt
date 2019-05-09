@@ -3,6 +3,7 @@
     height: 100vh;
     width: 100%;
     max-width: 1300px;
+    // min-width: 660px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -31,27 +32,7 @@
       margin-right: 20px;
     }
   }
-  
-  @media screen and (max-width: 600px) {
-    .container {
-      display: block;
-      overflow: scroll;
-      -webkit-overflow-scrolling: touch;
-      padding: 0;
-      .main {
-        width: 100%;
-        height: auto;
-        .topbar {
-          display: none;
-        }
-      }
-      .slidebar {
-        width: 100%;
-        height: auto;
-        margin-left: 0;
-      }
-    }
-  }
+
 </style>
 
 <template>

@@ -46,5 +46,23 @@ export default [
     "url": "https://api.itooi.cn/music/tencent/url?id=0009BcDy2B1y80&key=579621905",
     "pic": "https://api.itooi.cn/music/tencent/pic?id=0009BcDy2B1y80&key=579621905",
     "lrc": "https://api.itooi.cn/music/tencent/lrc?id=0009BcDy2B1y80&key=579621905"
+  },
+  {
+    "id": "0033bA6D1dUzEB",
+    "name": "无与伦比的美丽",
+    "time": 306,
+    "singer": "苏打绿",
+    "url": "https://api.itooi.cn/music/tencent/url?id=0033bA6D1dUzEB&key=579621905",
+    "pic": "https://api.itooi.cn/music/tencent/pic?id=0033bA6D1dUzEB&key=579621905",
+    "lrc": "https://api.itooi.cn/music/tencent/lrc?id=0033bA6D1dUzEB&key=579621905"
+  },
+  {
+    "id": "000MfVLK3c3Q0K",
+    "name": "相信",
+    "time": 427,
+    "singer": "苏打绿",
+    "url": "https://api.itooi.cn/music/tencent/url?id=000MfVLK3c3Q0K&key=579621905",
+    "pic": "https://api.itooi.cn/music/tencent/pic?id=000MfVLK3c3Q0K&key=579621905",
+    "lrc": "https://api.itooi.cn/music/tencent/lrc?id=000MfVLK3c3Q0K&key=579621905"
   }
 ]
