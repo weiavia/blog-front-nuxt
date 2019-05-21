@@ -1,4 +1,6 @@
-export const apiBaseUrl = 'http://94.191.104.238:3001/api/v1'
+import { SERVER_HOST } from '../env.js'
+
+export const apiBaseUrl = `${SERVER_HOST}/api/v1`
 
 export const pageTake = 10
 

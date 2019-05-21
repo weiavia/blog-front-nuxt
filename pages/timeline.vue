@@ -323,7 +323,7 @@ export default {
         creteTime: new Date().getTime(),
         photos: this.imgs
       })
-      console.log(this.timelines)
+
       this.content = ''
       this.imgs = ''
       this.$notify.success({ title: '提示', message: '发表成功!', position: 'top-right' });
