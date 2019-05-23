@@ -44,6 +44,10 @@ export default {
         {
           name: '崔庆才的个人博客',
           url: 'https://cuiqingcai.com/'
+        },
+        {
+          name: 'Lee',
+          url: 'https://teeoo.cn'
         }
       ]
     };
