@@ -24,7 +24,6 @@ module.exports = {
       ref  : 'origin/master',
       repo : 'git@github.com:weiavia/weityl-nuxt.git',
       path : '/root/weityl-nuxt',
-      'pre-setup': 'echo 先构建.nuxt文件 && ls',
       'post-deploy' : 'git pull && pm2 reload ecosystem.config.js --env production'
     }
   }
