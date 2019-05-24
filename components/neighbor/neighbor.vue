@@ -22,6 +22,10 @@ export default {
           url: 'https://www.bzqll.com/2019/01/262.html'
         },
         {
+          name: 'Litelee大佬的博客',
+          url: 'https://teeoo.cn'
+        },
+        {
           name: '七年的博客',
           url: 'https://www.aroad.xyz/'
         },
@@ -44,10 +48,6 @@ export default {
         {
           name: '崔庆才的个人博客',
           url: 'https://cuiqingcai.com/'
-        },
-        {
-          name: 'Lee',
-          url: 'https://teeoo.cn'
         }
       ]
     };
