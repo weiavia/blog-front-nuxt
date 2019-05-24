@@ -18,12 +18,14 @@ module.exports = {
 
   deploy : {
     production : {
-      user : 'node',
-      host : '212.83.163.1',
+      key: '/c/Users/pc/.ssh/id_rsa',
+      user : 'root',
+      host : ['94.191.104.238'],
       ref  : 'origin/master',
-      repo : 'git@github.com:repo.git',
-      path : '/var/www/production',
-      'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production'
+      repo : 'git@github.com:weiavia/weityl-nuxt.git',
+      path : '/root/weityl-nuxt',
+      'pre-setup': 'echo 先构建.nuxt文件 && ls',
+      'post-deploy' : ' pm2 reload ecosystem.config.js --env production'
     }
   }
 };

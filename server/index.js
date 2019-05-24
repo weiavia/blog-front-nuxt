@@ -39,4 +39,5 @@ async function start() {
   })
 }
 
+console.log('环境变量：', process.env.NODE_ENV)
 start()
