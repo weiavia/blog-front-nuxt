@@ -1,5 +1,6 @@
 const pkg = require('./package')
-
+const path = require('path')
+const fs = require('fs')
 
 module.exports = {
   mode: 'universal',
@@ -16,7 +17,7 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'http://at.alicdn.com/t/font_658757_izbua9mg6v9.css' }
+      { rel: 'stylesheet', href: 'https://at.alicdn.com/t/font_658757_izbua9mg6v9.css' }
     ]
   },
 
@@ -78,6 +79,10 @@ module.exports = {
   
   server: {
     port: 3000,
-    host: '0.0.0.0'
+    host: '0.0.0.0',
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'ssl/liaowei.info.key')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'ssl/liaowei.info.crt'))
+    }
   }
 }
