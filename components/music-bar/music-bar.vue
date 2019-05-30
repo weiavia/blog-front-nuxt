@@ -30,6 +30,7 @@ import axios from 'axios'
 import { parseLrc } from '@/helper'
 import { setTimeout, setInterval, clearInterval } from 'timers';
 import songs from './song'
+import song from './song';
 
 let index = Math.floor(Math.random() * songs.length)
 
@@ -58,7 +59,7 @@ export default {
   methods: {
     play() {
       // 加载解析歌词
-      axios.get(`https://v1.itooi.cn/tencent/lrc?id=${this.song.id}`).then((lrc) => {
+      axios.get(`https://v1.itooi.cn/netease/lrc?id=${this.song.id}`).then((lrc) => {
         this.lrc = parseLrc(lrc.data).ms
         this.initLyric()
         this.audio.play()
@@ -136,7 +137,7 @@ export default {
   },
   filters: {
     songSrc(id) {
-      return `https://v1.itooi.cn/tencent/url?id=${id}&quality=128`
+      return `https://v1.itooi.cn/netease/url?id=${id}&quality=192000`
     }
   }
 }
