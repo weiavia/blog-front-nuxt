@@ -67,7 +67,7 @@
     <div class="operation">
       <span @click="onComment">写评论</span>
       <span class="construction">分享</span>
-      <span class="construction">复制文章URL到剪切板</span>
+      <!-- <span class="construction">复制文章URL到剪切板</span> -->
     </div>
     <comment @reply="onReply" :article="article"/>
     <reply ref="reply"/>
