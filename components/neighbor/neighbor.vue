@@ -30,6 +30,10 @@ export default {
           url: 'https://www.dodoblog.cn/blog'
         },
         {
+          name: '鑫-个人博客',
+          url: 'https://www.ilxin.cn'
+        },
+        {
           name: '七年的博客',
           url: 'https://www.aroad.xyz/'
         },
