@@ -26,12 +26,12 @@ export default {
           url: 'https://teeoo.cn'
         },
         {
-          name: '七年的博客',
-          url: 'https://www.aroad.xyz/'
+          name: 'dodo大佬的博客',
+          url: 'https://www.dodoblog.cn/blog'
         },
         {
-          name: '雷小天的博客',
-          url: 'https://www.100txy.com/'
+          name: '七年的博客',
+          url: 'https://www.aroad.xyz/'
         },
         {
           name: '曹杰峰的博客',
@@ -44,10 +44,6 @@ export default {
         {
           name: '禹都一只猫',
           url: 'https://olei.me/'
-        },
-        {
-          name: '崔庆才的个人博客',
-          url: 'https://cuiqingcai.com/'
         }
       ]
     };
