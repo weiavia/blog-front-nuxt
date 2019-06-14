@@ -26,6 +26,16 @@
     .technology {
       margin-bottom: 30px;
       text-indent: 1em;
+      line-height: 1.8;
+      padding: 0 1em;
+    }
+    .idea {
+      list-style: none;
+      margin-bottom: 30px;
+      padding-left: 1em;
+      li {
+        margin-bottom: 15px;
+      }
     }
     .site {
       padding-left: 1em;
@@ -75,9 +85,20 @@
       </div>
       <!-- 君不见，黄河之水天上来，奔流到海不复回 君不见，高堂明镜悲白发，朝如青丝暮成雪。 人生得意须尽欢，莫使金樽空对月。天生我材必有用，千金散尽还复来。  烹羊宰牛且为乐，会须一饮三百杯。岑夫子，丹丘生，将进酒，杯莫停。与君歌一曲，请君为我倾耳听。钟鼓馔玉不足贵，但愿长醉不复醒。古来圣贤皆寂寞，惟有饮者留其名。陈王昔时宴平乐，斗酒十千恣欢谑。主人何为言少钱，径须沽取对君酌。五花马，千金裘，呼儿将出换美酒，与尔同销万古愁。 -->
     </div>
+
+    <ul class="idea">
+      <li>仙路尽头谁为峰、一见无始道成空</li>
+      <li>魔前一叩三千年、回首凡尘不做仙</li>
+      <li>我若要有天不可无我若要无天不许有</li>
+      <li>牛有德在此安敢欺我？  --牛有德</li>
+      <li>江湖走马，风也好，雨也罢，走的是路，交的是朋友  --牛有道</li>
+      <li>你好仙侠。</li>
+    </ul>
+
+
     <div class="tag">技术栈</div>
     <p class="technology">
-      JavaScript、Html、Css、NodeJs、Php、Mysql、Linux,   技术都是相通的类似的东西学多了 很多框架类的工具瞄一下文档都可以直接开撸。
+      JavaScript、TypeScript、NodeJs、Php、Mysql、Linux,   技术都是相通的类似的东西学多了 很多框架类的工具瞄一下文档都可以直接开撸。
     </p>
     <div class="tag">关于本站</div>
     <div class="site">

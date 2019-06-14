@@ -18,37 +18,33 @@ export default {
       current: 0,
       items: [
         {
-          name: 'Bzqll大佬的博客',
+          name: '鼻子亲了脸 - 有非常多的API 特别感谢大佬提供的音乐API',
           url: 'https://www.bzqll.com/2019/01/262.html'
+        },
+        {
+          name: 'dodo - 有很多开源库的前端大佬',
+          url: 'https://www.dodoblog.cn/blog'
+        },
+        {
+          name: '鑫 - 志同道合的前端大佬',
+          url: 'https://www.ilxin.cn'
+        },
+        {
+          name: '关中刀客在青岛 - 经历非富的前端',
+          url: 'http://e-art.top'
+        },
+        {
+          name: '忆梦 - 程序嫒？',
+          url: 'https://www.54loli.cn'
+        },
+        {
+          name: '堵文斐 - 一位PHP大佬',
+          url: 'https://duwenfei.com/'
         },
         {
           name: 'Litelee大佬的博客',
           url: 'https://teeoo.cn'
         },
-        {
-          name: 'dodo大佬的博客',
-          url: 'https://www.dodoblog.cn/blog'
-        },
-        {
-          name: '鑫-个人博客',
-          url: 'https://www.ilxin.cn'
-        },
-        {
-          name: '七年的博客',
-          url: 'https://www.aroad.xyz/'
-        },
-        {
-          name: '曹杰峰的博客',
-          url: 'https://www.caojiefeng.com'
-        },
-        {
-          name: '堵文斐个人博客',
-          url: 'https://duwenfei.com/'
-        },
-        {
-          name: '禹都一只猫',
-          url: 'https://olei.me/'
-        }
       ]
     };
   },
