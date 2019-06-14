@@ -50,7 +50,7 @@ export default {
     this.audio.addEventListener('ended', this.ended)
     this.audio.addEventListener('timeupdate', this.lrcRun)
 
-    let autoplay = sessionStorage.getItem('autoplay')
+    let autoplay = localStorage.getItem('autoplay')
     if(autoplay === 'true' || autoplay !== 'false') {
       this.playState = true
       this.play()
@@ -121,7 +121,7 @@ export default {
       if(!boolean) {
         this.$refs.audio.pause()
         clearInterval(this.lrcTime)
-        sessionStorage.setItem('autoplay', 'false')
+        localStorage.setItem('autoplay', 'false')
       } else {
         // 不存在歌词表示第一次播放。否则表示暂停后播放
         if(!this.lrc) {
@@ -130,7 +130,7 @@ export default {
           this.$refs.audio.play()
           this.lrcRun()
         }
-        sessionStorage.setItem('autoplay', 'true')
+        localStorage.setItem('autoplay', 'true')
       }
       this.playState = boolean
     }

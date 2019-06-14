@@ -29,4 +29,4 @@ export const PRAISE_TYPE = {
 
 export const HAS_ERROR = 1000
 
-export const COMMENT_PAGE_TAKE = 1
+export const COMMENT_PAGE_TAKE = 10

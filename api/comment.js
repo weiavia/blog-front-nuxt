@@ -16,4 +16,3 @@ export function getCommentsByThemeId(block_id, page_skip = 0, page_take = COMMEN
   let url = apiBaseUrl + `/comments?block_id=${block_id}&page_skip=${page_skip}&page_take=${page_take}`
   return request({ url })
 }
-

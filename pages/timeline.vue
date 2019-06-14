@@ -215,13 +215,13 @@
           <i class="circle" />
           <header class="clearfix">
             <div class="fl">
-              <input type="file" multiple ref="file" accept="image/gif, image/jpeg, image/png" class="file_form"/>
+              <input @click="eventPreCheckAuth($event)" type="file" multiple ref="file" accept="image/gif, image/jpeg, image/png" class="file_form" />
               <i class="iconfont icon-tupian pointer" title="插入图片"></i>
               <span class="tianqi">&nbsp;&nbsp;<i class="iconfont icon-tianqi" /><span v-if="weather"> {{weather.city}} {{weather.data[0].wea}} {{weather.data[0].tem}}</span></span>
-              <span>{{ timeParagraph }} 7.30</span>
+              <span>{{new Date() | time}} {{ timeParagraph }} </span>
             </div>
             <div class="fr">
-              <span class="writed" v-show="textareaShow" @click="submit" v-if="showarea">写好了</span>
+              <span class="writed" v-show="textareaShow" @click="eventPreCheckAuth($event); submit()" v-if="showarea">写好了</span>
               <i class="iconfont pointer area_show active" :class="{'icon-shousuo2': showarea, 'icon-shousuo1': !showarea}" @click="showarea = !showarea"/>
             </div>
           </header>
@@ -238,7 +238,7 @@
           <header>
             <i class="iconfont icon-tianqi" />
             <span>{{timeline.address}} {{timeline.weather}},</span>
-            <span>晚上{{timeline.creteTime | time}}</span>
+            <span>{{timeline.creteTime | time}} - {{timeline.creteTime | timeParagraphFilter }} </span>
           </header>
           <p class="text">{{timeline.content}}</p>
           <div class="imgs" v-if="timeline.photos[0] && timeline.photos[0].src" :style="{background: 'url('+ sourcePrefix(timeline.photos[0].src) +') no-repeat center center', backgroundSize: 'cover'}" v-viewer>
@@ -255,14 +255,14 @@
 import Scroll from '@/components/scroll/scroll'
 import { getWeather, uploadFile, checkToken } from '@/api/common'
 import { create, getTimeline } from '@/api/timeline'
-import { timeParagraph } from '@/helper'
+import { timeParagraph, formatTime } from '@/helper'
 import { staticSourceFilter } from '@/mixin'
+import commonFilter from '@/mixin'
 
 export default {
   middleware: 'common',
-  mixins: [ staticSourceFilter ],
+  mixins: [ staticSourceFilter, commonFilter ],
   async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
-    // { date: new Date(2016,0,0,0).getTime() / 1000 }
     let timelines = await getTimeline()
     return { timelines }
   },
@@ -295,12 +295,15 @@ export default {
     script.src = 'https://www.tianqiapi.com/api/?version=v1&callback=document.tianqi'
   },
   methods: {
-    async more() {
-      let timelines = await getTimeline({page: ++ this.page})
-      this.timelines = this.timelines.concat(timelines)
+    selectFile(event) {
+      event.preventDefault()
     },
     clearImg() {
       this.imgs = []
+    },
+    async more() {
+      let timelines = await getTimeline({page: ++ this.page})
+      this.timelines = this.timelines.concat(timelines)
     },
     async uploadImg(event) {
       let files = event.target.files

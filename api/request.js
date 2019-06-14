@@ -29,6 +29,7 @@ export default (param) => {
         // 没有授权
         if(error.response.status === 401 && !process.server) {
           authForm()
+          reject('noAuth')
           return
         }
 
@@ -51,7 +52,7 @@ export default (param) => {
   })
 }
 
-function authForm() {
+export function authForm() {
   window.vm.$prompt('', 'secret', {
     confirmButtonText: '好了',
     cancelButtonText: '没有',
@@ -61,6 +62,6 @@ function authForm() {
       localStorage.setItem('token', token)
     })
   }).catch(() => {
-    window.location.href = 'http://www.mtjj.xyz'
+    window.vm.$router.push('/')
   });
 }

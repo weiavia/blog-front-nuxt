@@ -60,9 +60,9 @@
   <scroll class="resume section_background">
     <div class="tag">廖威</div>
     <div class="statement clearfix">
-      <img src="../static/images/resume/0.jpg" class="me fl"/>
+      <img src="https://api.liaowei.info/static/images/liaowei/1.jpg" class="me fl"/>
       <div class="fr content">
-        <p>出生于1999-04-24, 是一名全栈工程师（就是什么都有接触，什么都不怎么精通的那种），喜欢看仙侠小说（道君、飞天），喜欢打游戏（PUBG单人四排吃鸡大神-恐怖如斯）。</p>
+        <p>生于1999-04-24, 是一名全栈工程师（就是什么都有接触，什么都不怎么精通的那种），喜欢仙侠（道君、飞天、修真界败类），喜欢打游戏（PUBG单四大神-恐怖如斯）。</p>
         <p>
           2014年8月那个夏天来到了衡阳技师学院，在校的四年全靠自学记得第一次入门前端看的是传智播客张鹏老师的7天搞定html+css, 
           当时看了视频跟着敲一篇感觉好简单,在跟着李炎恢的课程做出了几个静态网站，当学到js(第一门编程语言)时一脸懵逼什么函数作用域各种调用返回值学的乱七八糟的，
@@ -70,14 +70,14 @@
           在用了几个月的时间学了韩顺平《php从入门到精通》149集(听它的课是一种享受) 最后终于做出来了一个论坛也算是入门了WEB开发吧。
         </p>
         <p>
-          大学几年里很幸运有 <em>妙味课堂</em>(前端领域说第二应该没人敢说第一吧?)  <em>慕课网</em>(各种实战扩充了我的视野)  这种教育平台。  我的偶像：<a href="http://www.imooc.com/t/108955"  target="_blank" >liuyubobobo</a>
+          大学几年里很幸运有 <em>妙味课堂</em>(前端领域说第二应该没人敢说第一吧?)  <em>慕课网</em>(各种实战扩充了我的视野)  这种教育平台。  我的偶像：<a href="http://www.imooc.com/t/108955"  target="_blank" >liuyubobobo</a>。
         </p>
       </div>
       <!-- 君不见，黄河之水天上来，奔流到海不复回 君不见，高堂明镜悲白发，朝如青丝暮成雪。 人生得意须尽欢，莫使金樽空对月。天生我材必有用，千金散尽还复来。  烹羊宰牛且为乐，会须一饮三百杯。岑夫子，丹丘生，将进酒，杯莫停。与君歌一曲，请君为我倾耳听。钟鼓馔玉不足贵，但愿长醉不复醒。古来圣贤皆寂寞，惟有饮者留其名。陈王昔时宴平乐，斗酒十千恣欢谑。主人何为言少钱，径须沽取对君酌。五花马，千金裘，呼儿将出换美酒，与尔同销万古愁。 -->
     </div>
     <div class="tag">技术栈</div>
     <p class="technology">
-      JavaScript、Html、Css、NodeJs、Php、Mysql、Linux
+      JavaScript、Html、Css、NodeJs、Php、Mysql、Linux,   技术都是相通的类似的东西学多了 很多框架类的工具瞄一下文档都可以直接开撸。
     </p>
     <div class="tag">关于本站</div>
     <div class="site">

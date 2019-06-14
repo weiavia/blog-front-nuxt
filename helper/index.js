@@ -9,7 +9,9 @@ export function deleteNullKey(obj) {
 
 
 export function formatTime (date) {
-  date = new Date(date)
+  if(!(date instanceof Date)) {
+    date = new Date(date)
+  }
   
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -153,27 +155,27 @@ export function parseLrc(lrc) {
 }
 
 // 时间段
-export function timeParagraph() {
+export function timeParagraph(param_hour) {
   let date = new Date()
-  let hour = date.getHours()
+  let hour = param_hour || date.getHours()
   let str = ''
 
   if(hour >= 5 && hour <= 9) {
     str = '清晨'
   } 
-  else if (hour > 9 && hour <= 12) {
+  else if (hour >= 10 && hour <= 12) {
     str = '上午'
   }
-  else if (hour > 12 && hour <= 4) {
+  else if (hour >= 12 && hour <= 2) {
     str = '中午'
   }
-  else if (hour > 4 && hour < 6) {
+  else if (hour >= 2 && hour <= 5) {
     str = '下午'
   }
   else if (hour >= 6 && hour <= 11) {
     str = '晚上'
   } else {
-    str = '傍晚'
+    str = '深夜'
   }
 
   return str

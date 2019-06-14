@@ -10,6 +10,7 @@
       border-radius: 50%
       margin-right: 30px
       flex-wrap: nowrap
+      flex-shrink: 0
     .main
       flex-grow: 1
       .info

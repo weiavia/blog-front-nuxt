@@ -1,6 +1,7 @@
-import { formatTime } from '@/helper'
+import { formatTime, timeParagraph } from '@/helper'
 import { classMenu } from '@/config'
 import { SERVER_HOST } from '@/env'
+import { authForm } from '@/api/request'
 
 export const articleFilter = {
   filters: {
@@ -19,13 +20,6 @@ export const articleFilter = {
   }
 }
 
-function js_strto_time(str_time){  
-  var new_str = str_time.replace(/:/g,"-");  
-  new_str = new_str.replace(/ /g,"-");  
-  var arr = new_str.split("-");  
-  var datum = new Date(Date.UTC(arr[0],arr[1]-1,arr[2],arr[3]-8,arr[4],arr[5]));  
-  return  datum.getTime()/1000;  
-}  
 
 export const staticSourceFilter = {
   filters: {
@@ -36,10 +30,37 @@ export const staticSourceFilter = {
       let time = formatTime(date)
       return `${time.month}月${time.day}日 ${time.hour}:${time.minute}:${time.second}`
     },
+    timeParagraphFilter(date) {
+      let time = formatTime(date)
+      return timeParagraph(time.hour)
+    }
   },
   methods: {
     sourcePrefix(src) {
       return `${SERVER_HOST}/static/${src}`
     }
   }
+}
+
+export default {
+  methods: {
+    async eventPreCheckAuth(event) {
+      // await checkToken()
+      // try {
+      //   await checkToken()
+      // } catch(e) {
+      //   console.log('catch')
+      //   event.preventDefault()
+      // }
+      // console.log(event)
+      // 事件线程不会等待异步结束 所以这种方法不可行
+
+      // token存在否， token过期否 ？
+      const token = localStorage.getItem('token')
+      if(!token) {
+        event.preventDefault()
+        authForm()
+      }
+    }
+  },
 }
