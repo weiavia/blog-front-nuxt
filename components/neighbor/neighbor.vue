@@ -34,7 +34,7 @@ export default {
           url: 'http://e-art.top'
         },
         {
-          name: '忆梦 - 程序嫒？',
+          name: '忆梦 - 何叶',
           url: 'https://www.54loli.cn'
         },
         {
@@ -42,8 +42,8 @@ export default {
           url: 'https://duwenfei.com/'
         },
         {
-          name: 'Litelee大佬的博客',
-          url: 'https://teeoo.cn'
+          name: 'Stephen - 全栈大佬',
+          url: 'https://www.stephen520.cn/'
         },
       ]
     };
