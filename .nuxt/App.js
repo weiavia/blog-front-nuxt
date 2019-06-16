@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 
-import '..\\node_modules\\element-ui\\lib\\theme-chalk\\index.css'
+import '../node_modules/element-ui/lib/theme-chalk/index.css'
 
-import '..\\static\\style\\normalize.css'
+import '../static/style/normalize.css'
 
-import '..\\static\\style\\common.scss'
+import '../static/style/common.scss'
 
-import _6f6c098b from '..\\layouts\\default.vue'
-import _33f51829 from '..\\layouts\\sidebar\\index.vue'
-import _8fcbedd2 from '..\\layouts\\topbar\\index.vue'
+import _6f6c098b from '../layouts/default.vue'
+import _33f51829 from '../layouts/sidebar/index.vue'
+import _8fcbedd2 from '../layouts/topbar/index.vue'
 
 const layouts = { "_default": _6f6c098b,"_sidebar/index": _33f51829,"_topbar/index": _8fcbedd2 }
 

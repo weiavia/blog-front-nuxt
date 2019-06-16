@@ -2,11 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { interopDefault } from './utils'
 
-const _aa9361a0 = () => interopDefault(import('..\\pages\\resume.vue' /* webpackChunkName: "pages_resume" */))
-const _13342284 = () => interopDefault(import('..\\pages\\timeline.vue' /* webpackChunkName: "pages_timeline" */))
-const _588e72a8 = () => interopDefault(import('..\\pages\\write.vue' /* webpackChunkName: "pages_write" */))
-const _7341cc5b = () => interopDefault(import('..\\pages\\article\\_id\\index.vue' /* webpackChunkName: "pages_article__id_index" */))
-const _112c33c2 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */))
+const _a40f1880 = () => interopDefault(import('../pages/resume.vue' /* webpackChunkName: "pages/resume" */))
+const _4e7f6314 = () => interopDefault(import('../pages/timeline.vue' /* webpackChunkName: "pages/timeline" */))
+const _37505fc8 = () => interopDefault(import('../pages/write.vue' /* webpackChunkName: "pages/write" */))
+const _c4e1bebe = () => interopDefault(import('../pages/article/_id/index.vue' /* webpackChunkName: "pages/article/_id/index" */))
+const _0808ef8f = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 Vue.use(Router)
 
@@ -84,23 +84,23 @@ export function createRouter() {
 
     routes: [{
       path: "/resume",
-      component: _aa9361a0,
+      component: _a40f1880,
       name: "resume"
     }, {
       path: "/timeline",
-      component: _13342284,
+      component: _4e7f6314,
       name: "timeline"
     }, {
       path: "/write",
-      component: _588e72a8,
+      component: _37505fc8,
       name: "write"
     }, {
       path: "/article/:id?",
-      component: _7341cc5b,
+      component: _c4e1bebe,
       name: "article-id"
     }, {
       path: "/",
-      component: _112c33c2,
+      component: _0808ef8f,
       name: "index"
     }],
 
