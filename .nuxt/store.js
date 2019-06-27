@@ -3,22 +3,21 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const log = console // on server-side, consola will catch all console.log
 const VUEX_PROPERTIES = ['state', 'getters', 'actions', 'mutations']
 let store = {}
 
 void (function updateModules() {
-  store = normalizeRoot(require('@/store/index.js'), 'store/index.js')
+  store = normalizeRoot(require('../store/index.js'), 'store/index.js')
 
   // If store is an exported method = classic mode (deprecated)
 
   // Enforce store modules
   store.modules = store.modules || {}
 
-  resolveStoreModules(require('@/store/actions.js'), 'actions.js')
-  resolveStoreModules(require('@/store/getters.js'), 'getters.js')
-  resolveStoreModules(require('@/store/mutations.js'), 'mutations.js')
-  resolveStoreModules(require('@/store/state.js'), 'state.js')
+  resolveStoreModules(require('../store/actions.js'), 'actions.js')
+  resolveStoreModules(require('../store/getters.js'), 'getters.js')
+  resolveStoreModules(require('../store/mutations.js'), 'mutations.js')
+  resolveStoreModules(require('../store/state.js'), 'state.js')
 
   // If the environment supports hot reloading...
 })()
@@ -86,7 +85,7 @@ function normalizeRoot(moduleData, filePath) {
 
 function normalizeState(moduleData, filePath) {
   if (typeof moduleData !== 'function') {
-    log.warn(`${filePath} should export a method that returns an object`)
+    console.warn(`${filePath} should export a method that returns an object`)
     const state = Object.assign({}, moduleData)
     return () => state
   }
@@ -95,7 +94,7 @@ function normalizeState(moduleData, filePath) {
 
 function normalizeModule(moduleData, filePath) {
   if (moduleData.state && typeof moduleData.state !== 'function') {
-    log.warn(`'state' should be a method that returns an object in ${filePath}`)
+    console.warn(`'state' should be a method that returns an object in ${filePath}`)
     const state = Object.assign({}, moduleData.state)
     // Avoid TypeError: setting a property that has only a getter when overwriting top level keys
     moduleData = Object.assign({}, moduleData, { state: () => state })

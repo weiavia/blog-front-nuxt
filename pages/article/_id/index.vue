@@ -34,6 +34,9 @@
     padding: 30px 0 0 30px
     color: #333
     font-size: 16px
+    .update_time
+      text-decoration: none
+      font-size: 14px
     span
       margin-right: 15px
       text-decoration: underline
@@ -67,6 +70,7 @@
     <div class="operation">
       <span @click="onComment">写评论</span>
       <span class="construction">分享</span>
+      <span class="update_time">上次更新时间：{{article.updateTime | time}}</span>
       <!-- <span class="construction">复制文章URL到剪切板</span> -->
     </div>
     <comment @reply="onReply" :article="article"/>
@@ -115,6 +119,7 @@ export default {
   },
 
   async mounted() {
+    console.log(this.article)
     this.$nextTick(() => {
       this.$refs.scroller.refresh()
     })
