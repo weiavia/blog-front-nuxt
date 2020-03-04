@@ -166,13 +166,13 @@ export function timeParagraph(param_hour) {
   else if (hour >= 10 && hour <= 12) {
     str = '上午'
   }
-  else if (hour >= 12 && hour <= 2) {
+  else if (hour >= 12 && hour <= 14) {
     str = '中午'
   }
-  else if (hour >= 2 && hour <= 5) {
+  else if (hour >= 14 && hour <= 17) {
     str = '下午'
   }
-  else if (hour >= 6 && hour <= 11) {
+  else if (hour >= 18 && hour <= 23) {
     str = '晚上'
   } else {
     str = '深夜'

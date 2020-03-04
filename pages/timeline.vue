@@ -217,7 +217,7 @@
             <div class="fl">
               <input @click="eventPreCheckAuth($event)" type="file" multiple ref="file" accept="image/gif, image/jpeg, image/png" class="file_form" />
               <i class="iconfont icon-tupian pointer" title="插入图片"></i>
-              <span class="tianqi">&nbsp;&nbsp;<i class="iconfont icon-tianqi" /><span v-if="weather"> {{weather.city}} {{weather.data[0].wea}} {{weather.data[0].tem}}</span></span>
+              <span class="tianqi">&nbsp;&nbsp;<span v-if="weather"> {{weather.city}} {{weather.wea}} {{weather.tem}}℃</span></span>
               <span>{{new Date() | time}} {{ timeParagraph }} </span>
             </div>
             <div class="fr">
@@ -282,17 +282,21 @@ export default {
     this.timeParagraph = timeParagraph()
   },
   mounted() {
+    console.log(this.timelines)
     this.$refs.file.addEventListener('change', this.uploadImg, false);
     
     // jsonp 获取天气
     let that = this
     document.tianqi = function(res) {
+      console.log(res)
       that.weather = res
     }
 
     let script = document.createElement('script')
     document.body.appendChild(script)
-    script.src = 'https://www.tianqiapi.com/api/?version=v1&callback=document.tianqi'
+    script.src = 'https://tianqiapi.com/api?version=v6&appid=42324257&appsecret=CkpQQ6GC&callback=document.tianqi&city=衡阳'
+
+    
   },
   methods: {
     selectFile(event) {
@@ -314,7 +318,7 @@ export default {
       let param = {
         content: this.content,
         address: this.weather.city,
-        weather: this.weather.data[0].wea + this.weather.data[0].tem,
+        weather: this.weather.wea + this.weather.tem + '℃',
         photos: this.imgs
       }
       let result = await create(param)
@@ -322,7 +326,7 @@ export default {
       this.timelines.unshift({
         content: this.content,
         address: this.weather.city,
-        weather: this.weather.data[0].wea + this.weather.data[0].tem,
+        weather: this.weather.wea + this.weather.tem,
         creteTime: new Date().getTime(),
         photos: this.imgs
       })
