@@ -62,9 +62,19 @@ export default {
       axios.get(`https://v1.itooi.cn/netease/lrc?id=${this.song.id}`).then((lrc) => {
         this.lrc = parseLrc(lrc.data).ms
         this.initLyric()
-        this.audio.play()
+
+        // chrome66版本后需要用户与浏览器有交互行为后才可以自动播放 抛出异常表示不能自动播放 等用户进行点击行为后在调用 this.audio.play()
+        this.audio.play().catch((err) => {
+          document.addEventListener('click', this.enventPlay)
+        })
       })
     },
+
+    enventPlay() {
+      this.audio.play()
+      document.removeEventListener('click', this.enventPlay)
+    },
+    
     initLyric() {
       this.totalTime = 0
       this.currentLine = 1
@@ -137,7 +147,7 @@ export default {
   },
   filters: {
     songSrc(id) {
-      return `https://v1.itooi.cn/netease/url?id=${id}&quality=192000`
+      return `https://v1.itooi.cn/netease/url?id=${id}&quality=flac`
     }
   }
 }
