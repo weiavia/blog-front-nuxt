@@ -21,7 +21,19 @@
       }
       .page {
         width: 100%;
-        height: calc(100% - 50px);
+        height: calc(100% - 90px);
+        margin-bottom: 10px;
+      }
+      footer {
+        height: 25px;
+        line-height: 25px;
+        background: $color_section_background;
+        font-size: 12px;
+        padding: 0 10px;
+        a {
+          color: #333;
+          text-decoration: none;
+        }
       }
     }
     
@@ -43,6 +55,7 @@
       <div class="main">
         <topbar class="topbar"/>
         <Nuxt class="page" />
+        <footer><a href="http://www.beian.miit.gov.cn" target="_blank">Copyright © 2019 路过一只大侠 &nbsp; 湘ICP备19010169号</a> </footer>
         <!-- <Nuxt class="page" keepAlive /> -->
       </div>
     </div>
