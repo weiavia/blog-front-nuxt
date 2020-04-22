@@ -37,6 +37,7 @@ export const staticSourceFilter = {
   },
   methods: {
     sourcePrefix(src) {
+      src = encodeURIComponent(src)
       return `${SERVER_HOST}/static/${src}`
     }
   }

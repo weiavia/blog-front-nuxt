@@ -3,11 +3,11 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _a40f1880 = () => interopDefault(import('../pages/resume.vue' /* webpackChunkName: "pages/resume" */))
-const _4e7f6314 = () => interopDefault(import('../pages/timeline.vue' /* webpackChunkName: "pages/timeline" */))
-const _37505fc8 = () => interopDefault(import('../pages/write.vue' /* webpackChunkName: "pages/write" */))
-const _c4e1bebe = () => interopDefault(import('../pages/article/_id/index.vue' /* webpackChunkName: "pages/article/_id/index" */))
-const _0808ef8f = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _6c19afb0 = () => interopDefault(import('../pages/resume.vue' /* webpackChunkName: "pages/resume" */))
+const _09416304 = () => interopDefault(import('../pages/timeline.vue' /* webpackChunkName: "pages/timeline" */))
+const _bfb153a8 = () => interopDefault(import('../pages/write.vue' /* webpackChunkName: "pages/write" */))
+const _cf13e29e = () => interopDefault(import('../pages/article/_id/index.vue' /* webpackChunkName: "pages/article/_id/index" */))
+const _784f14c2 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -27,23 +27,23 @@ export const routerOptions = {
 
   routes: [{
     path: "/resume",
-    component: _a40f1880,
+    component: _6c19afb0,
     name: "resume"
   }, {
     path: "/timeline",
-    component: _4e7f6314,
+    component: _09416304,
     name: "timeline"
   }, {
     path: "/write",
-    component: _37505fc8,
+    component: _bfb153a8,
     name: "write"
   }, {
     path: "/article/:id?",
-    component: _c4e1bebe,
+    component: _cf13e29e,
     name: "article-id"
   }, {
     path: "/",
-    component: _0808ef8f,
+    component: _784f14c2,
     name: "index"
   }],
 

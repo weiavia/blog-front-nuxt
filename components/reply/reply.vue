@@ -115,7 +115,7 @@ export default {
       this.form.quote_id = quote_id
 
       if(type === COMMENT_TYPE.ARTICLE) {
-        this.title = '自古评论出淫才'
+        this.title = '路过一只大侠'
       } else {
         this.title = '回复年少不听张学友的评论'
       }

@@ -12,8 +12,8 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_swplugin_697f7c48 from 'nuxt_plugin_swplugin_697f7c48' // Source: ./sw.plugin.js (mode: 'client')
-import nuxt_plugin_axios_833b33a2 from 'nuxt_plugin_axios_833b33a2' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_swplugin_24417c38 from 'nuxt_plugin_swplugin_24417c38' // Source: ./sw.plugin.js (mode: 'client')
+import nuxt_plugin_axios_0681de1f from 'nuxt_plugin_axios_0681de1f' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_elementui_d905880e from 'nuxt_plugin_elementui_d905880e' // Source: ../plugins/element-ui (mode: 'all')
 import nuxt_plugin_viever_45f59d45 from 'nuxt_plugin_viever_45f59d45' // Source: ../plugins/viever (mode: 'all')
 import nuxt_plugin_vuemavoneditor_e5e1de58 from 'nuxt_plugin_vuemavoneditor_e5e1de58' // Source: ../plugins/vue-mavon-editor (mode: 'all')
@@ -63,6 +63,8 @@ async function createApp (ssrContext) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
+    head: {"title":"路过一只大侠","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"via's blog"},{"http-equiv":"Content-Security-Policy","content":"upgrade-insecure-requests"},{"hid":"mobile-web-app-capable","name":"mobile-web-app-capable","content":"yes"},{"hid":"apple-mobile-web-app-title","name":"apple-mobile-web-app-title","content":"weityl-nuxt"},{"hid":"author","name":"author","content":"weiavia"},{"hid":"theme-color","name":"theme-color","content":"#fff"},{"hid":"og:type","name":"og:type","property":"og:type","content":"website"},{"hid":"og:title","name":"og:title","property":"og:title","content":"weityl-nuxt"},{"hid":"og:site_name","name":"og:site_name","property":"og:site_name","content":"weityl-nuxt"},{"hid":"og:description","name":"og:description","property":"og:description","content":"via's blog"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","href":"https:\u002F\u002Fat.alicdn.com\u002Ft\u002Ffont_658757_izbua9mg6v9.css"},{"rel":"manifest","href":"\u002F_nuxt\u002Fmanifest.2946cfd7.json"}],"style":[],"script":[],"htmlAttrs":{"lang":"en"}},
+
     store,
     router,
     nuxt: {
@@ -92,7 +94,10 @@ async function createApp (ssrContext) {
         err = err || null
         app.context._errored = Boolean(err)
         err = err ? normalizeError(err) : null
-        const nuxt = this.nuxt || this.$options.nuxt
+        let nuxt = app.nuxt // to work with @vue/composition-api, see https://github.com/nuxt/nuxt.js/issues/6517#issuecomment-573280207
+        if (this) {
+          nuxt = this.nuxt || this.$options.nuxt
+        }
         nuxt.dateErr = Date.now()
         nuxt.err = err
         // Used in src/server.js
@@ -136,7 +141,7 @@ async function createApp (ssrContext) {
       throw new Error('inject(key, value) has no key provided')
     }
     if (value === undefined) {
-      throw new Error('inject(key, value) has no value provided')
+      throw new Error(`inject('${key}', value) has no value provided`)
     }
 
     key = '$' + key
@@ -173,12 +178,12 @@ async function createApp (ssrContext) {
 
   // Plugin execution
 
-  if (process.client && typeof nuxt_plugin_swplugin_697f7c48 === 'function') {
-    await nuxt_plugin_swplugin_697f7c48(app.context, inject)
+  if (process.client && typeof nuxt_plugin_swplugin_24417c38 === 'function') {
+    await nuxt_plugin_swplugin_24417c38(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_833b33a2 === 'function') {
-    await nuxt_plugin_axios_833b33a2(app.context, inject)
+  if (typeof nuxt_plugin_axios_0681de1f === 'function') {
+    await nuxt_plugin_axios_0681de1f(app.context, inject)
   }
 
   if (typeof nuxt_plugin_elementui_d905880e === 'function') {

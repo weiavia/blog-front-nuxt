@@ -60,7 +60,7 @@
         fontSize="16px" 
         defaultOpen="preview"
         :boxShadow="boxShadow"
-        codeStyle="atelier-cave-dark"
+        codeStyle="atelier-lakeside-light"
         placeholder="烹羊宰牛且为乐，会须一饮三百杯"
         :toolbarsFlag="toolbarsFlag"
         :value="article.content"

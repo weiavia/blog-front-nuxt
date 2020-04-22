@@ -119,7 +119,7 @@
       border: 1px solid #aaa;
       margin-top: 20px;
       cursor: pointer;
-      background: url('../static/cj.jpg') no-repeat center center;
+      // background: url('../static/cj.jpg') no-repeat center center;
       position: relative;
       img {
         width: 100%;
@@ -264,6 +264,7 @@ export default {
   mixins: [ staticSourceFilter, commonFilter ],
   async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
     let timelines = await getTimeline()
+    console.log(timelines)
     return { timelines }
   },
   data () {
@@ -288,6 +289,7 @@ export default {
     // jsonp 获取天气
     let that = this
     document.tianqi = function(res) {
+      console.log('天气：')
       console.log(res)
       that.weather = res
     }
