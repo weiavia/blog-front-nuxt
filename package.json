@@ -21,7 +21,7 @@
     "element-ui": "^2.4.11",
     "koa": "^2.6.2",
     "mavon-editor-via": "^1.0.2",
-    "nuxt": "^2.4.0",
+    "nuxt": "^3.4.3",
     "perfect-scrollbar": "^1.4.0",
     "rxjs": "^6.4.0",
     "v-viewer": "^1.4.0"
